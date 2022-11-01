@@ -1,6 +1,6 @@
 import requests
 
-http_link = 'http://192.168.29.157:'
+http_link = 'http://192.168.6.228:'
 printer1 = '7125'
 printer2 = '7126'
 
@@ -8,7 +8,8 @@ X = 'X'
 Y = 'Y'
 Z = 'Z'
 
-gcodeUrl = '/printer/gcode/script?script='
+gcodeUrl = 'http://192.168.6.228:7125/printer/gcode/script?script='
+
 printerInformationUrl = '/printer/info'
 
 home_axis_command = 'G28'
@@ -23,26 +24,14 @@ def get_url(url):
 
 # Home printer's axes
 # 0:X axis, 1:Y axis, 2:Z axis, 3:All Axes
-def home(printer, axis):
-    if printer == 1:
-        if axis == 0:
-            return http_link + printer1 + gcodeUrl + home_axis_command + X
-        if axis == 1:
-            return http_link + printer1 + gcodeUrl + home_axis_command + Y
-        if axis == 2:
-            return http_link + printer1 + gcodeUrl + home_axis_command + Z
-        if axis == 3:
-            return http_link + printer1 + gcodeUrl + home_axis_command + X + Y + Z
+def home():
+    command_pool = [gcodeUrl + 'G28Y', gcodeUrl + 'G28X', gcodeUrl + 'G28H', gcodeUrl + 'G28I', gcodeUrl + 'G28J']
+    return command_pool
 
-    if printer == 2:
-        if axis == 0:
-            return http_link + printer2 + gcodeUrl + home_axis_command + X
-        if axis == 1:
-            return http_link + printer2 + gcodeUrl + home_axis_command + Y
-        if axis == 2:
-            return http_link + printer2 + gcodeUrl + home_axis_command + Z
-        if axis == 3:
-            return http_link + printer2 + gcodeUrl + home_axis_command + X + Y + Z
+
+def move_wire_to_safe_position():
+    command_pool = [gcodeUrl + 'G90', gcodeUrl + 'G1Y0F12000', gcodeUrl + 'G1X70F12000']
+    return command_pool
 
 
 # Get Printer's motor positions
