@@ -10,34 +10,148 @@ Z = 'Z'
 
 gcodeUrl = 'http://192.168.6.228:7125/printer/gcode/script?script='
 
-printerInformationUrl = '/printer/info'
+printerInfoUrl = 'http://192.168.6.228:7125/printer/info'
+
+speedSettingUrl = gcodeUrl + 'SET_VELOCITY_LIMIT VELOCITY='
+
+accelerationSettingUrl = gcodeUrl + 'M204S'
+
+#gcodeUrl = 'http://192.168.6.228:7125/printer/gcode/script?script=G90'
+
 
 home_axis_command = 'G28'
+absolute_position_command = 'G90'
+relative_position_command = 'G91'
 move_axis_command = 'G1'
 get_current_position = 'M114'
 endstop_status = 'M119'
 
+axis_accel_values = {'h': 1500, 'i': 1500, 'j': 1500, 'k': 200, 'l': 150, 'x': 1500, 'y': 1500, 'n': 150}
+axis_vel_values = {'h': 300, 'i': 300, 'j': 300, 'k': 3, 'l': 3, 'x': 300, 'y': 300, 'n': 3}
 
+
+# Fetch URL
 def get_url(url):
     return requests.post(url)
 
+# VELOCITY MACROS
 
-# Home printer's axes
-# 0:X axis, 1:Y axis, 2:Z axis, 3:All Axes
-def home():
-    command_pool = [gcodeUrl + 'G28Y', gcodeUrl + 'G28X', gcodeUrl + 'G28H', gcodeUrl + 'G28I', gcodeUrl + 'G28J']
+# Velocity Setting
+def m201(value):
+    command_pool = [speedSettingUrl + value]
     return command_pool
 
 
-def move_wire_to_safe_position():
-    command_pool = [gcodeUrl + 'G90', gcodeUrl + 'G1Y0F12000', gcodeUrl + 'G1X70F12000']
+# Acceleration Setting
+def m204(value):
+    command_pool = accelerationSettingUrl + value
     return command_pool
 
 
-# Get Printer's motor positions
-def get_pos(printer):
-    if printer == 1:
-        return http_link + printer1 + gcodeUrl + get_current_position
+# Set maximum velocity and acceleration value for axis
+def set_max_vel_accel(velocity, acceleration):
+    command_pool = [m201(velocity), m204(acceleration)]
+    return command_pool
 
-    if printer == 2:
-        return http_link + printer2 + gcodeUrl + get_current_position
+
+# Set max accel value (used for homing)
+def set_max_accel(axis):
+    value = axis_accel_values.get(axis)
+    return m204(value)
+
+# VELOCITY MACROS END
+
+# HOMING COMMANDS
+
+
+# Home axis
+def home_axis(axis):
+    command_pool = [set_max_accel(axis), gcodeUrl + home_axis_command + axis]
+    return command_pool
+
+
+# Home all
+def home_all():
+    command_pool = [home_axis('I'), home_axis('H'), home_axis('J'), home_axis('Y'), home_axis('X'), home_axis('N'), home_axis('K')]
+    return command_pool
+
+# HOMING COMMANDS END
+
+# AXIS MOVEMENT COMMANDS
+
+
+# Move axis to
+def move_axis_to(axis, value):
+    command_pool = [set_max_vel_accel(str(axis_vel_values.get(axis)), str(axis_accel_values.get(axis))), gcodeUrl + absolute_position_command, gcodeUrl + move_axis_command + axis + str(value)]
+    return command_pool
+
+
+# Move axis forward by
+def move_axis_forward_by(axis, value):
+    command_pool = [set_max_vel_accel(str(axis_vel_values.get(axis)), str(axis_accel_values.get(axis))), gcodeUrl + relative_position_command, gcodeUrl + move_axis_command + axis + str(value)]
+    return command_pool
+
+
+# Move axis backward by
+def move_axis_backward_by(axis, value):
+    command_pool = [set_max_vel_accel(str(axis_vel_values.get(axis)), str(axis_accel_values.get(axis))), gcodeUrl + relative_position_command, gcodeUrl + move_axis_command + axis + str(value)]
+    return command_pool
+
+
+# HIGHER LEVEL CALLS
+
+# MOVE WIRE GANTRY CALLS
+
+# MOVE WIRE - create example for each
+
+
+# Move Wire to
+def move_wire_to(value):
+    command_pool = [move_axis_to('Y', value)]
+    return command_pool
+
+
+# Move Wire Up by
+def move_wire_up_by(value):
+    command_pool = [move_axis_backward_by('Y', value)]
+    return command_pool
+
+
+# Move Wire Down by
+def move_wire_down_by(value):
+    command_pool = [move_axis_forward_by('Y', value)]
+    return command_pool
+
+
+# MOVE WIRE END
+
+
+# MOVE GANTRY
+
+
+# Move Gantry to
+def move_gantry_to(value):
+    command_pool = [move_axis_to('X', value)]
+    return command_pool
+
+
+# Move Gantry Forward by - towards blade
+def move_gantry_forward_by(value):
+    command_pool = [move_axis_forward_by('X', value)]
+    return command_pool
+
+
+# Move Gantry Backward to - away from blade
+def move_gantry_backward_by(value):
+    command_pool = [move_axis_backward_by('X', value)]
+    return command_pool
+
+# MOVE GANTRY END
+
+# MOVE SLIDE GANTRY
+
+
+# Move 
+def get_current_position():
+    command_pool = [gcodeUrl + get_current_position]
+    return command_pool
