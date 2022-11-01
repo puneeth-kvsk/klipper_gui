@@ -19,6 +19,7 @@ while(1):
 
     if input_command == 'safepos':
         commands = helper.move_wire_to_safe_position()
+
         with ThreadPoolExecutor(max_workers=len(commands)) as pool:
             for command in range(0, len(commands)):
                 pool.submit(helper.get_url, commands[command])
@@ -26,9 +27,17 @@ while(1):
 
     elif input_command == 'homeall':
         commands = helper.home()
-        #print(commands)
+
         with ThreadPoolExecutor(max_workers=len(commands)) as pool:
             for command in range(0, len(commands)):
                 pool.submit(helper.get_url, commands[command])
                 #time.sleep(2)
+
+    elif input_command == 'homeallsafepos':
+        commands = helper.home()
+        commands.append(helper.move_wire_to_safe_position())
+
+        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
+            for command in range(0, len(commands)):
+                pool.submit(helper.get_url, commands[command])
 
