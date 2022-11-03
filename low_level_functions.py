@@ -46,4 +46,15 @@ def set_vel_accel_auto(axis):
     command_pool.append(m204(str(accel_value)))
     return command_pool
 
+
+# Set velocity and acceleratiom values for FACING - to be calculated, calibrated and set to hardcoded values for usage
+#def set_vel_accel_facing(axis):
+#    vel_value = axis_vel_values.get(axis)
+#    accel_value = axis_accel_values.get(axis)
+
+#    command_pool = []
+#    command_pool.append(m201(str(vel_value)))
+#    command_pool.append(m204(str(accel_value)))
+#    return command_pool
+
 # VELOCITY MACROS END

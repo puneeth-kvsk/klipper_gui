@@ -76,12 +76,5 @@ def move_wire_gantry_to(y_value, x_value):
     command_pool = basic_helper.move_multiple_axes_to(params)
     return command_pool
 
-# Move Flywheel to
-def move_flywheel_and_block_to():
-
-
-
-# Move Block to
-def move_block_to():
 
 
