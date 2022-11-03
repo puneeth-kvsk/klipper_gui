@@ -1,4 +1,5 @@
-import helper
+import low_level_functions
+import basic_helper
 import api_calls
 from concurrent.futures import ThreadPoolExecutor
 import time
@@ -9,68 +10,52 @@ while 1:
     if input_command == 'home axis':
         axis = input('Enter axis:')
 
-        commands = helper.home_axis(axis.upper())
+        commands = basic_helper.home_axis(axis.upper())
+        api_calls.execute_urls(commands, 0)
 
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
-                time.sleep(0.01)
+    elif input_command == 'home multiple':
+        axes = input("Enter the axes to home:")
+
+        commands = api_calls.home_multiple(axes)
+        api_calls.execute_urls(commands, 0)
 
     elif input_command == 'home all':
-        commands = helper.home_all()
+        commands = api_calls.home_all()
+        api_calls.execute_urls(commands, 0)
 
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
-                time.sleep(0.01)
+    elif input_command == 'home wire gantry':
+        commands = api_calls.home_wire_gantry()
+        api_calls.execute_urls(commands, 0.01)
 
-    elif input_command == 'move slide basic':
-        commands = api_calls.move_slide_in_2d_plane(50, 50)
+    elif input_command == 'home slide gantry':
+        commands = api_calls.home_slide_gantry()
+        api_calls.execute_urls(commands, 0.01)
 
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
-                #time.sleep(0.01)
+    elif input_command == 'home flywheel and block':
+        commands = api_calls.home_flywheel_and_block()
+        api_calls.execute_urls(commands, 0.01)
 
     elif input_command == 'move axis to':
         axis = input("Enter axis:")
         value = input("Enter Value:")
 
-        commands = helper.move_axis_to(axis.upper(), str(value))
+        commands = basic_helper.move_axis_to(axis.upper(), str(value))
+        api_calls.execute_urls(commands, 0)
 
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
+    elif input_command == 'move slide gantry':
+        h_value = input("Enter H move distance:")
+        i_value = input("Enter I move distance:")
+        j_value = input("Enter J move distance:")
 
-    # this can be removed because it might not be used
-    elif input_command == 'set maximum velocity and acceleration':
-        print('\nH: V=300, A=1500\nI: V=300, A =1500\nJ: V=300, A=1500\nK: V=3, A=200\nL: V=3, A=150\nX: V=300, A=1500\nY: V=300, A=1500\nN: V=3, A=150\n')
-        velocity = input("Enter Velocity:")
-        acceleration = input("Enter Acceleration")
+        commands = api_calls.move_slide_gantry_to(h_value, i_value, j_value)
+        api_calls.execute_urls(commands, 0)
 
-        commands = helper.set_max_vel_accel(str(velocity), str(acceleration))
+    elif input_command == 'move wire gantry':
+        y_value = input("Enter Y move distance:")
+        x_value = input("Enter X move distance:")
 
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
+        commands = api_calls.move_wire_gantry_to(y_value, x_value)
+        api_calls.execute_urls(commands, 0)
 
-    # complete this shit later
-    if input_command == 'move wire to safe position':
-        commands = helper.move_wire_to_safe_position()
-
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
-                time.sleep(2)
-
-    elif input_command == 'move wire to':
-        #axis = input("Enter axis:")
-        value = input("Enter Value:")
-
-        commands = helper.move_wire_to(str(value))
-
-        with ThreadPoolExecutor(max_workers=len(commands)) as pool:
-            for command in range(0, len(commands)):
-                pool.submit(api_calls.get_url, commands[command])
-
-
+    else:
+        print("Entered Command does not exist!")

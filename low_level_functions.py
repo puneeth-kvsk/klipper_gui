@@ -1,7 +1,7 @@
 
-http_link = 'http://192.168.236.220:'
+#http_link = 'http://192.168.236.220:'
 
-gcodeUrl = 'http://192.168.236.220:7125/printer/gcode/script?script='
+gcodeUrl = 'http://fluiddpi.local/printer/gcode/script?script='
 printerInfoUrl = 'http://192.168.6.228:7125/printer/info'
 speedSettingUrl = gcodeUrl + 'SET_VELOCITY_LIMIT VELOCITY='
 accelerationSettingUrl = gcodeUrl + 'M204S'
@@ -40,7 +40,10 @@ def set_max_accel(axis):
 def set_vel_accel_auto(axis):
     vel_value = axis_vel_values.get(axis)
     accel_value = axis_accel_values.get(axis)
-    command_pool = [m201(str(vel_value)), m204(str(accel_value))]
+
+    command_pool = []
+    command_pool.append(m201(str(vel_value)))
+    command_pool.append(m204(str(accel_value)))
     return command_pool
 
 # VELOCITY MACROS END
