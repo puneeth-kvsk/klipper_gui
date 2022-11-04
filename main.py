@@ -1,6 +1,7 @@
 import low_level_functions
 import basic_helper
 import api_calls_lower
+import api_calls_higher
 from concurrent.futures import ThreadPoolExecutor
 import time
 
@@ -17,15 +18,15 @@ while 1:
         axes = input("Enter the axes to home:")
 
         commands = api_calls_lower.home_multiple(axes)
-        api_calls_lower.execute_urls(commands, 0)
+        api_calls_lower.execute_urls(commands, 0.01)
 
     elif input_command == 'home all':
         commands = api_calls_lower.home_all()
-        api_calls_lower.execute_urls(commands, 0)
+        api_calls_lower.execute_urls(commands, 0.01)
 
     elif input_command == 'home wire gantry':
         commands = api_calls_lower.home_wire_gantry()
-        api_calls_lower.execute_urls(commands, 0.01)
+        api_calls_lower.execute_urls(commands, 0.05)
 
     elif input_command == 'home slide gantry':
         commands = api_calls_lower.home_slide_gantry()
@@ -56,6 +57,11 @@ while 1:
 
         commands = api_calls_lower.move_wire_gantry_to(y_value, x_value)
         api_calls_lower.execute_urls(commands, 0)
+
+    elif input_command == 'move wire gantry to safe position':
+
+        commands = api_calls_higher.move_wire_gantry_to_safe_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
 
     else:
         print("Entered Command does not exist!")

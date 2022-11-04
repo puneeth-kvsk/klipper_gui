@@ -12,38 +12,36 @@ axis_vel_values = {'H': 300, 'I': 300, 'J': 300, 'K': 3, 'L': 3, 'X': 300, 'Y': 
 
 # VELOCITY MACROS
 
-# Velocity Setting
-def m201(value):
+# Maximum Velocity Setting
+def max201(value):
     command_pool = speedSettingUrl + value
     return command_pool
 
 
-# Acceleration Setting
-def m204(value):
+# Maximum Acceleration Setting
+def max204(value):
     command_pool = accelerationSettingUrl + value
     return command_pool
 
 
-# Set maximum velocity and acceleration value for axis manually - not useful
+# Set maximum velocity and maximum acceleration value for axis manually - not useful
 def set_max_vel_accel_manual(velocity, acceleration):
-    command_pool = [m201(velocity), m204(acceleration)]
+    command_pool = [max201(velocity), max204(acceleration)]
     return command_pool
 
 
-# Set max accel value (used for homing)
+# Set maximum acceleration value (used for homing)
 def set_max_accel(axis):
     value = axis_accel_values.get(axis)
-    return m204(value)
+    return max204(value)
 
 
-# Set velocity and acceleration values routine
-def set_vel_accel_auto(axis):
+# Set maximum velocity and maximum acceleration values routine
+def set_max_vel_accel_auto(axis):
     vel_value = axis_vel_values.get(axis)
     accel_value = axis_accel_values.get(axis)
 
-    command_pool = []
-    command_pool.append(m201(str(vel_value)))
-    command_pool.append(m204(str(accel_value)))
+    command_pool = [max201(str(vel_value)), max204(str(accel_value))]
     return command_pool
 
 

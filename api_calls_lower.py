@@ -1,6 +1,6 @@
 import requests
 import basic_helper
-from concurrent.futures import ThreadPoolExecutor as pool
+from concurrent.futures import ThreadPoolExecutor
 import time
 
 
@@ -11,7 +11,7 @@ def get_url(url):
 
 # Execute URLs
 def execute_urls(commands, delay):
-    with pool(max_workers=len(commands)):
+    with ThreadPoolExecutor(max_workers=len(commands)) as pool:
         for command in range(0, len(commands)):
             pool.submit(get_url, commands[command])
             time.sleep(delay)
@@ -71,7 +71,7 @@ def move_slide_gantry_to(h_value, i_value, j_value):
 
 
 # Move Wire Gantry
-def move_wire_gantry_to(y_value, x_value):
+def move_wire_gantry_to(x_value, y_value):
     params = {'Y': y_value, 'X': x_value}
     command_pool = basic_helper.move_multiple_axes_to(params)
     return command_pool
