@@ -63,5 +63,20 @@ while 1:
         commands = api_calls_higher.move_wire_gantry_to_safe_pos()
         api_calls_lower.execute_urls(commands, 0.05)
 
+    elif input_command == '1':
+
+        commands = api_calls_higher.take_sections()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    elif input_command == '2':
+
+        commands = api_calls_higher.teardown()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    elif input_command == '3':
+
+        commands = api_calls_higher.slide_pickup()
+        api_calls_lower.execute_urls(commands, 0.05)
+
     else:
         print("Entered Command does not exist!")

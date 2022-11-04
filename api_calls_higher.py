@@ -1,8 +1,9 @@
+import basic_helper
 import individual_commands
 import api_calls_lower
 
 
-# Take sections
+# Take section process
 def take_sections(thickness, counts):
     command_pool = []
     for count in range(0, counts):
@@ -11,12 +12,26 @@ def take_sections(thickness, counts):
     return command_pool
 
 
-# Move wire gantry to safe position
-def move_wire_gantry_to_safe_pos():
+# Tissue Teardown process
+def teardown():
     command_pool = []
-    command_pool.extend(api_calls_lower.move_wire_gantry_to(95, 12))
-    #print(command_pool)
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_dip_pos())
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_preteardown_pos())
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_postteardown_pos())
     return command_pool
+
+
+# Slide pickup process
+def slide_pickup():
+    command_pool = []
+    command_pool.extend(api_calls_lower.move_slide_to_pickup_position())
+    command_pool.extend(basic_helper.delay_func(4000))
+    command_pool.extend(api_calls_lower.move_slide_to_pivot_position())
+    command_pool.extend(basic_helper.delay_func(4000))
+    command_pool.extend(api_calls_lower.move_slide_to_final_position())
+    return command_pool
+
 
 
 #

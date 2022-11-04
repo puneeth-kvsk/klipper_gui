@@ -38,13 +38,7 @@ def home_multiple(axes):
     return command_pool
 
 
-# Home Wire Gantry
-def home_wire_gantry():
-    command_pool = []
-    command_pool.extend(basic_helper.home_axis('Y'))
-    command_pool.extend(basic_helper.home_axis('X'))
-    return command_pool
-
+# SLIDE GANTRY ROUTINES
 
 # Home Slide gantry
 def home_slide_gantry():
@@ -55,18 +49,52 @@ def home_slide_gantry():
     return command_pool
 
 
+# Move slide gantry
+def move_slide_gantry_to(h_value, i_value, j_value):
+    params = {'H': h_value, 'I': i_value, 'J': j_value}
+    command_pool = basic_helper.move_multiple_axes_to(params)
+    return command_pool
+
+
+# Move slide to pickup position
+def move_slide_to_pickup_position():
+    command_pool = []
+    command_pool.extend(move_slide_gantry_to(190, 110, 30))
+    return command_pool
+
+
+# Move slide to pivot position
+def move_slide_to_pivot_position():
+    command_pool = []
+    command_pool.extend(move_slide_gantry_to(200.498, 95.007, 40))
+    return command_pool
+
+
+# Move slide to final positon
+def move_slide_to_final_position():
+    command_pool = []
+    command_pool.extend(move_slide_gantry_to(185.177, 82.1515, 40))
+    return command_pool
+# SLIDE GANTRY ROUTINES END
+
+
+# FLYWHEEL ROUTINES
 # Home Flywheel and Block
 def home_flywheel_and_block():
     command_pool = []
     command_pool.extend(basic_helper.home_axis('N'))
     command_pool.extend(basic_helper.home_axis('K'))
     return command_pool
+# FLYWHEEL ROUTINES END
+
+# WIRE GANTRY ROUTINES
 
 
-# Move slide gantry
-def move_slide_gantry_to(h_value, i_value, j_value):
-    params = {'H': h_value, 'I': i_value, 'J': j_value}
-    command_pool = basic_helper.move_multiple_axes_to(params)
+# Home Wire Gantry
+def home_wire_gantry():
+    command_pool = []
+    command_pool.extend(basic_helper.home_axis('Y'))
+    command_pool.extend(basic_helper.home_axis('X'))
     return command_pool
 
 
@@ -77,4 +105,30 @@ def move_wire_gantry_to(x_value, y_value):
     return command_pool
 
 
+# Move wire gantry to safe position
+def move_wire_gantry_to_safe_pos():
+    command_pool = []
+    command_pool.extend(move_wire_gantry_to(95, 12))
+    return command_pool
 
+
+# Move wire gantry to dip position
+def move_wire_gantry_to_dip_pos():
+    command_pool = []
+    command_pool.extend(move_wire_gantry_to(118,21))
+    return command_pool
+
+
+# Move wire gantry to pre-teardown position
+def move_wire_gantry_to_preteardown_pos():
+    command_pool = []
+    command_pool.extend(move_wire_gantry_to(131, 15.5))
+    return command_pool
+
+
+# Move wire gantry to post-teardown process
+def move_wire_gantry_to_postteardown_pos():
+    command_pool = []
+    command_pool.extend(move_wire_gantry_to(131, 14.5))
+    return command_pool
+# WIRE GANTRY ROUTINES END
