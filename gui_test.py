@@ -1,47 +1,58 @@
 import sys
-from PyQt5.QtWidgets import QApplication, QWidget, QPushButton
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import pyqtSlot
-import api_calls_higher
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QPushButton,
+                             QToolTip, QMessageBox, QLabel)
 
 
-def window():
-    app = QApplication(sys.argv)
-
-    widget = QWidget()
-    widget.setGeometry(200, 200, 320, 200)
-    widget.setWindowTitle("Microtome")
-
-    button1 = QPushButton(widget)
-    button1.setText("Take Sections")
-    button1.move(1, 32)
-    #button1.clicked.connect(take_sections_input)
-    button1.clicked.connect(take_sections_button)
+class Window2(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("Take Sections")
 
 
-    button2 = QPushButton(widget)
-    button2.setText("Teardown Phase 1")
-    button2.move(1, 64)
-    button2.clicked.connect(teardown_phase_one)
+class Window(QMainWindow):
+    def __init__(self):
+        super().__init__()
 
-    button2 = QPushButton(widget)
-    button2.setText("Teardown Phase 2")
-    button2.move(1, 96)
-    button2.clicked.connect(teardown_phase_two)
+        self.title = "Microtome"
+        self.top = 100
+        self.left = 100
+        self.width = 680
+        self.height = 500
 
-    button2 = QPushButton(widget)
-    button2.setText("Final Process")
-    button2.move(1, 128)
-    button2.clicked.connect(final_process)
+        self.pushButton1 = QPushButton("Take Sections", self)
+        self.pushButton1.move(1, 32)
+        self.pushButton1.clicked.connect(self.window2)              # <===
 
-    button2 = QPushButton(widget)
-    button2.setText("Discard tissue")
-    button2.move(1, 160)
-    button2.clicked.connect(discard_tissue)
+        self.pushButton1 = QPushButton("Teardown phase one", self)
+        self.pushButton1.move(1, 64)
+        self.pushButton1.clicked.connect(teardown_phase_one)
 
-    widget.show()
-    sys.exit(app.exec_())
+        self.pushButton1 = QPushButton("Teardown phase two", self)
+        self.pushButton1.move(1, 96)
+        self.pushButton1.clicked.connect(teardown_phase_two)
 
+        self.pushButton1 = QPushButton("Final Process", self)
+        self.pushButton1.move(1, 128)
+        self.pushButton1.clicked.connect(final_process)
+
+        self.pushButton1 = QPushButton("Discard Tissue", self)
+        self.pushButton1.move(1, 128)
+        self.pushButton1.clicked.connect(discard_tissue)
+
+        self.main_window()
+
+    def main_window(self):
+        self.label = QLabel("Manager", self)
+        self.label.move(285, 175)
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.top, self.left, self.width, self.height)
+        self.show()
+
+    def window2(self):                                             # <===
+        self.w = Window2()
+        self.w.show()
+        self.hide()
 
 def take_sections_button():
     print("Take Section process")
@@ -75,4 +86,6 @@ def discard_tissue():
 
 
 if __name__ == '__main__':
+    app = QApplication(sys.argv)
     window()
+    sys.exit(app.exec())
