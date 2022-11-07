@@ -1,8 +1,11 @@
 import requests
 import basic_helper
+import low_level_functions
 from concurrent.futures import ThreadPoolExecutor
 import time
 
+hot_pool_gate_open_angle = 35
+hot_pool_gate_close_angle = 135
 
 # Fetch URL
 def get_url(url):
@@ -39,7 +42,6 @@ def home_multiple(axes):
 
 
 # SLIDE GANTRY ROUTINES
-
 # Home Slide gantry
 def home_slide_gantry():
     command_pool = []
@@ -70,7 +72,7 @@ def move_slide_to_pivot_position():
     return command_pool
 
 
-# Move slide to final positon
+# Move slide to final position
 def move_slide_to_final_position():
     command_pool = []
     command_pool.extend(move_slide_gantry_to(185.177, 82.1515, 40))
@@ -87,9 +89,8 @@ def home_flywheel_and_block():
     return command_pool
 # FLYWHEEL ROUTINES END
 
+
 # WIRE GANTRY ROUTINES
-
-
 # Home Wire Gantry
 def home_wire_gantry():
     command_pool = []
@@ -131,4 +132,45 @@ def move_wire_gantry_to_postteardown_pos():
     command_pool = []
     command_pool.extend(move_wire_gantry_to(131, 14.5))
     return command_pool
+
+
+# Move wire gantry to slide pickup position
+def move_wire_gantry_to_slide_pickup_pos():
+    command_pool = []
+    #command_pool.extend(move_wire_gantry_to(, ))  # To be filled with hardcoded values
+    return command_pool
+
 # WIRE GANTRY ROUTINES END
+
+
+# POOL GATE ROUTINES
+# Pool gate open
+def hot_pool_gate_open():
+    command_pool = []
+    command_pool.extend(low_level_functions.gcodeUrl + 'SET_SERVO SERVO=config_name ANGLE=' + str(hot_pool_gate_open_angle))
+    return command_pool
+
+
+# Pool gate close
+def hot_pool_gate_close():
+    command_pool = []
+    command_pool.extend(low_level_functions.gcodeUrl + 'SET_SERVO SERVO=config_name ANGLE=' + str(hot_pool_gate_close_angle))
+    return command_pool
+
+
+# Burn wire
+def burn_wire(delay):
+    command_pool = []
+    command_pool.extend(low_level_functions.gcodeUrl + 'SET_PIN PIN=wire_power VALUE=1')
+    command_pool.extend(basic_helper.delay_func(delay))
+    command_pool.extend(low_level_functions.gcodeUrl + 'SET_PIN PIN=wire_power VALUE=0')
+    return command_pool
+
+
+# Discard Pump
+def discard_pump_actuation():
+    command_pool = []
+    command_pool.extend(low_level_functions.gcodeUrl + basic_helper.pump_actuation_command + '120')
+    command_pool.extend((basic_helper.delay_func(1000)))
+    command_pool.extend(low_level_functions.gcodeUrl + basic_helper.pump_actuation_command + '0')
+    return command_pool

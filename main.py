@@ -60,22 +60,41 @@ while 1:
 
     elif input_command == 'move wire gantry to safe position':
 
-        commands = api_calls_higher.move_wire_gantry_to_safe_pos()
+        commands = api_calls_lower.move_wire_gantry_to_safe_pos()
         api_calls_lower.execute_urls(commands, 0.05)
 
+    # Discard Tissue
+    elif input_command == '0':
+        commands = api_calls_higher.discard_tissue()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Take Sections
     elif input_command == '1':
+        thickness = input("Enter the thickness of tissue:")
+        if thickness == '':
+            print('Default thickness set to 3 micron')
+            thickness = 0.003
+        count = input("Enter number of tissues to cut:")
 
-        commands = api_calls_higher.take_sections()
+        commands = api_calls_higher.take_sections(thickness, count)
         api_calls_lower.execute_urls(commands, 0.05)
 
+    # Teardown phase one
     elif input_command == '2':
 
-        commands = api_calls_higher.teardown()
+        commands = api_calls_higher.teardown_phase_one()
         api_calls_lower.execute_urls(commands, 0.05)
 
+    # Teardown phase two
     elif input_command == '3':
 
-        commands = api_calls_higher.slide_pickup()
+        commands = api_calls_higher.teardown_phase_two()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Final Process
+    elif input_command == '4':
+
+        commands = api_calls_higher.final_process()
         api_calls_lower.execute_urls(commands, 0.05)
 
     else:
