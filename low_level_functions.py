@@ -56,3 +56,7 @@ def set_max_vel_accel_auto(axis):
 #    return command_pool
 
 # VELOCITY MACROS END
+
+
+def print_test():
+    print("Hello World")

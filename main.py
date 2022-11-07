@@ -60,7 +60,7 @@ while 1:
 
     elif input_command == 'move wire gantry to safe position':
 
-        commands = api_calls_higher.move_wire_gantry_to_safe_pos()
+        commands = api_calls_lower.move_wire_gantry_to_safe_pos()
         api_calls_lower.execute_urls(commands, 0.05)
 
     elif input_command == '1':
