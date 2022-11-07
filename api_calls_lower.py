@@ -7,6 +7,7 @@ import time
 hot_pool_gate_open_angle = 35
 hot_pool_gate_close_angle = 135
 
+
 # Fetch URL
 def get_url(url):
     return requests.post(url)
