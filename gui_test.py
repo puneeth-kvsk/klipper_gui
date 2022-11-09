@@ -33,20 +33,15 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addWidget(self.take_section_button)
 
-        self.teardown_phase_one_button = QPushButton(self.verticalLayoutWidget)
-        self.teardown_phase_one_button.setObjectName(u"teardown_phase_one_button")
+        self.first_tissue_pickup_button = QPushButton(self.verticalLayoutWidget)
+        self.first_tissue_pickup_button.setObjectName(u"first_tissue_pickup_button")
 
-        self.verticalLayout.addWidget(self.teardown_phase_one_button)
+        self.verticalLayout.addWidget(self.first_tissue_pickup_button)
 
-        self.teardown_phase_two_button = QPushButton(self.verticalLayoutWidget)
-        self.teardown_phase_two_button.setObjectName(u"teardown_phase_two_button")
+        self.second_tissue_pickup_button = QPushButton(self.verticalLayoutWidget)
+        self.second_tissue_pickup_button.setObjectName(u"second_tissue_pickup_button")
 
-        self.verticalLayout.addWidget(self.teardown_phase_two_button)
-
-        self.final_process_button = QPushButton(self.verticalLayoutWidget)
-        self.final_process_button.setObjectName(u"final_process_button")
-
-        self.verticalLayout.addWidget(self.final_process_button)
+        self.verticalLayout.addWidget(self.second_tissue_pickup_button)
 
         self.discard_tissue_button = QPushButton(self.verticalLayoutWidget)
         self.discard_tissue_button.setObjectName(u"discard_tissue_button")
@@ -104,7 +99,7 @@ class Ui_MainWindow(object):
         self.api_calls_lower.setGeometry(QRect(320, 0, 131, 41))
         self.verticalLayoutWidget_3 = QWidget(self.page_4)
         self.verticalLayoutWidget_3.setObjectName(u"verticalLayoutWidget_3")
-        self.verticalLayoutWidget_3.setGeometry(QRect(490, 40, 212, 151))
+        self.verticalLayoutWidget_3.setGeometry(QRect(490, 40, 263, 244))
         self.verticalLayout_3 = QVBoxLayout(self.verticalLayoutWidget_3)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
@@ -118,24 +113,39 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_3.addWidget(self.move_slide_gantry_to_button)
 
-        self.move_slide_to_pickup_position_button = QPushButton(self.verticalLayoutWidget_3)
-        self.move_slide_to_pickup_position_button.setObjectName(u"move_slide_to_pickup_position_button")
+        self.move_slide_to_first_pickup_position_button = QPushButton(self.verticalLayoutWidget_3)
+        self.move_slide_to_first_pickup_position_button.setObjectName(u"move_slide_to_first_pickup_position_button")
 
-        self.verticalLayout_3.addWidget(self.move_slide_to_pickup_position_button)
+        self.verticalLayout_3.addWidget(self.move_slide_to_first_pickup_position_button)
 
-        self.move_slide_to_pivot_position_button = QPushButton(self.verticalLayoutWidget_3)
-        self.move_slide_to_pivot_position_button.setObjectName(u"move_slide_to_pivot_position_button")
+        self.move_slide_to_first_pivot_position_button = QPushButton(self.verticalLayoutWidget_3)
+        self.move_slide_to_first_pivot_position_button.setObjectName(u"move_slide_to_first_pivot_position_button")
 
-        self.verticalLayout_3.addWidget(self.move_slide_to_pivot_position_button)
+        self.verticalLayout_3.addWidget(self.move_slide_to_first_pivot_position_button)
 
-        self.move_slide_to_final_position_button = QPushButton(self.verticalLayoutWidget_3)
-        self.move_slide_to_final_position_button.setObjectName(u"move_slide_to_final_position_button")
+        self.move_slide_to_first_final_position_button = QPushButton(self.verticalLayoutWidget_3)
+        self.move_slide_to_first_final_position_button.setObjectName(u"move_slide_to_first_final_position_button")
 
-        self.verticalLayout_3.addWidget(self.move_slide_to_final_position_button)
+        self.verticalLayout_3.addWidget(self.move_slide_to_first_final_position_button)
+
+        self.move_slide_to_second_pickup_position_button = QPushButton(self.verticalLayoutWidget_3)
+        self.move_slide_to_second_pickup_position_button.setObjectName(u"move_slide_to_second_pickup_position_button")
+
+        self.verticalLayout_3.addWidget(self.move_slide_to_second_pickup_position_button)
+
+        self.move_slide_to_second_pivot_position_button = QPushButton(self.verticalLayoutWidget_3)
+        self.move_slide_to_second_pivot_position_button.setObjectName(u"move_slide_to_second_pivot_position_button")
+
+        self.verticalLayout_3.addWidget(self.move_slide_to_second_pivot_position_button)
+
+        self.move_slide_to_second_final_position_button = QPushButton(self.verticalLayoutWidget_3)
+        self.move_slide_to_second_final_position_button.setObjectName(u"move_slide_to_second_final_position_button")
+
+        self.verticalLayout_3.addWidget(self.move_slide_to_second_final_position_button)
 
         self.verticalLayoutWidget_5 = QWidget(self.page_4)
         self.verticalLayoutWidget_5.setObjectName(u"verticalLayoutWidget_5")
-        self.verticalLayoutWidget_5.setGeometry(QRect(10, 150, 309, 213))
+        self.verticalLayoutWidget_5.setGeometry(QRect(10, 150, 311, 244))
         self.verticalLayout_5 = QVBoxLayout(self.verticalLayoutWidget_5)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
@@ -169,14 +179,19 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_5.addWidget(self.move_wire_gantry_to_postteardown_pos_button)
 
-        self.move_wire_gantry_to_slide_pickup_pos_button = QPushButton(self.verticalLayoutWidget_5)
-        self.move_wire_gantry_to_slide_pickup_pos_button.setObjectName(u"move_wire_gantry_to_slide_pickup_pos_button")
+        self.move_wire_gantry_to_first_pickup_pos_button = QPushButton(self.verticalLayoutWidget_5)
+        self.move_wire_gantry_to_first_pickup_pos_button.setObjectName(u"move_wire_gantry_to_first_pickup_pos_button")
 
-        self.verticalLayout_5.addWidget(self.move_wire_gantry_to_slide_pickup_pos_button)
+        self.verticalLayout_5.addWidget(self.move_wire_gantry_to_first_pickup_pos_button)
+
+        self.move_wire_gantry_to_second_pickup_pos_button = QPushButton(self.verticalLayoutWidget_5)
+        self.move_wire_gantry_to_second_pickup_pos_button.setObjectName(u"move_wire_gantry_to_second_pickup_pos_button")
+
+        self.verticalLayout_5.addWidget(self.move_wire_gantry_to_second_pickup_pos_button)
 
         self.verticalLayoutWidget_6 = QWidget(self.page_4)
         self.verticalLayoutWidget_6.setObjectName(u"verticalLayoutWidget_6")
-        self.verticalLayoutWidget_6.setGeometry(QRect(510, 210, 160, 80))
+        self.verticalLayoutWidget_6.setGeometry(QRect(540, 300, 160, 80))
         self.verticalLayout_6 = QVBoxLayout(self.verticalLayoutWidget_6)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalLayout_6.setContentsMargins(0, 0, 0, 0)
@@ -195,16 +210,16 @@ class Ui_MainWindow(object):
         self.home_flywheel_and_block_button.setGeometry(QRect(60, 100, 191, 25))
         self.burn_wire_button = QPushButton(self.page_4)
         self.burn_wire_button.setObjectName(u"burn_wire_button")
-        self.burn_wire_button.setGeometry(QRect(540, 310, 89, 25))
+        self.burn_wire_button.setGeometry(QRect(580, 400, 89, 25))
         self.discard_pump_actuation_button = QPushButton(self.page_4)
         self.discard_pump_actuation_button.setObjectName(u"discard_pump_actuation_button")
-        self.discard_pump_actuation_button.setGeometry(QRect(500, 350, 171, 25))
+        self.discard_pump_actuation_button.setGeometry(QRect(540, 440, 171, 25))
         self.home_all_button = QPushButton(self.page_4)
         self.home_all_button.setObjectName(u"home_all_button")
         self.home_all_button.setGeometry(QRect(60, 50, 189, 25))
         self.backButton5 = QPushButton(self.page_4)
         self.backButton5.setObjectName(u"backButton5")
-        self.backButton5.setGeometry(QRect(350, 420, 89, 25))
+        self.backButton5.setGeometry(QRect(370, 470, 89, 25))
         self.stackedWidget.addWidget(self.page_4)
         self.page = QWidget()
         self.page.setObjectName(u"page")
@@ -232,6 +247,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_2.addWidget(self.j_value_label)
 
+        self.move_slide_gantry_speed_label = QLabel(self.verticalLayoutWidget_2)
+        self.move_slide_gantry_speed_label.setObjectName(u"move_slide_gantry_speed_label")
+
+        self.verticalLayout_2.addWidget(self.move_slide_gantry_speed_label)
+
         self.verticalLayoutWidget_4 = QWidget(self.page)
         self.verticalLayoutWidget_4.setObjectName(u"verticalLayoutWidget_4")
         self.verticalLayoutWidget_4.setGeometry(QRect(380, 110, 160, 131))
@@ -252,6 +272,11 @@ class Ui_MainWindow(object):
         self.j_value_input.setObjectName(u"j_value_input")
 
         self.verticalLayout_4.addWidget(self.j_value_input)
+
+        self.move_slide_gantry_speed_input = QTextEdit(self.verticalLayoutWidget_4)
+        self.move_slide_gantry_speed_input.setObjectName(u"move_slide_gantry_speed_input")
+
+        self.verticalLayout_4.addWidget(self.move_slide_gantry_speed_input)
 
         self.horizontalLayoutWidget = QWidget(self.page)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
@@ -292,6 +317,11 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_7.addWidget(self.y_value_label)
 
+        self.move_wire_gantry_speed = QLabel(self.verticalLayoutWidget_7)
+        self.move_wire_gantry_speed.setObjectName(u"move_wire_gantry_speed")
+
+        self.verticalLayout_7.addWidget(self.move_wire_gantry_speed)
+
         self.verticalLayoutWidget_8 = QWidget(self.page_2)
         self.verticalLayoutWidget_8.setObjectName(u"verticalLayoutWidget_8")
         self.verticalLayoutWidget_8.setGeometry(QRect(400, 130, 160, 81))
@@ -307,6 +337,11 @@ class Ui_MainWindow(object):
         self.y_value_input.setObjectName(u"y_value_input")
 
         self.verticalLayout_8.addWidget(self.y_value_input)
+
+        self.move_wire_gantry_speed_input = QTextEdit(self.verticalLayoutWidget_8)
+        self.move_wire_gantry_speed_input.setObjectName(u"move_wire_gantry_speed_input")
+
+        self.verticalLayout_8.addWidget(self.move_wire_gantry_speed_input)
 
         self.horizontalLayoutWidget_2 = QWidget(self.page_2)
         self.horizontalLayoutWidget_2.setObjectName(u"horizontalLayoutWidget_2")
@@ -374,7 +409,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(2)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -392,31 +427,79 @@ class Ui_MainWindow(object):
         # Take Section Page
         self.take_section_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.backButton1.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
-        self.saveButton1.clicked.connect(self.thickness_and_count_input)
+        
 
-        # Move Slide Gantry To
+        # Move slide gantry page
         self.move_slide_gantry_to_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.backButton2.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-        self.saveButton2.clicked.connect(self.move_slide_gantry_input)
+        
 
-        # Move Wire Gantry To
+        # Move wire gantry page
         self.move_wire_gantry_to_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
         self.backButton3.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-        self.saveButton3.clicked.connect(self.move_wire_gantry_input)
+        
 
-        # Burn Wire
+        # Burn Wire Page
         self.burn_wire_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
         self.backButton4.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+        
+
+        # Highest Level API calls
+        self.saveButton1.clicked.connect(self.take_section_func)
+        self.first_tissue_pickup_button.clicked.connect(api_calls_higher.first_tissue_pickup)
+        self.second_tissue_pickup_button.clicked.connect(api_calls_higher.second_tissue_pickup)
+        self.discard_tissue_button.clicked.connect(api_calls_higher.discard_tissue)
+
+        # Lower Level API Calls
+        # Home all
+        self.home_all_button.clicked.connect(api_calls_lower.home_all)
+        # Home Flywheel and Block
+        self.home_flywheel_and_block_button.clicked.connect(api_calls_lower.home_flywheel_and_block)
+        # Home Wire Gantry
+        self.home_wire_gantry_button.clicked.connect(api_calls_lower.home_wire_gantry)
+        # Move Wire Gantry To - takes inputs
+        self.saveButton3.clicked.connect(self.move_wire_gantry_input)
+        # Move Wire Gantry to safe position
+        self.move_wire_gantry_to_safe_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_safe_pos)
+        # Move Wire Gantry to dip position
+        self.move_wire_gantry_to_dip_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_dip_pos)
+        # Move Wire Gantry to pre-teardown position
+        self.move_wire_gantry_to_preteardown_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_preteardown_pos)
+        # Move Wire Gantry to post-teardown positon
+        self.move_wire_gantry_to_postteardown_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_postteardown_pos)
+        # Move Wire Gantry to First Pickup position
+        self.move_wire_gantry_to_first_pickup_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_first_pickup_pos)
+        # Move Wire Gantry to Second Pickup position
+        self.move_wire_gantry_to_second_pickup_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_second_pickup_pos)
+        # Home Slide Gantry
+        self.home_slide_gantry_button.clicked.connect(api_calls_lower.home_slide_gantry)
+        # Move Slide Gantry To - takes inputs
+        self.saveButton2.clicked.connect(self.move_slide_gantry_input)
+        # Move Slide to first pickup position
+        self.move_slide_to_first_pickup_position_button.clicked.connect(api_calls_lower.move_slide_to_first_pickup_position)
+        # Move Slide to first pivot position
+        self.move_slide_to_first_pivot_position_button.clicked.connect(api_calls_lower.move_slide_to_first_pivot_position)
+        # Move Slide to first final position
+        self.move_slide_to_first_final_position_button.clicked.connect(api_calls_lower.move_slide_to_first_final_position)
+        # Move Slide to second pickup postion
+        self.move_slide_to_second_pickup_position_button.clicked.connect(api_calls_lower.move_slide_to_second_pickup_position)
+        # Move Slide to second pivot position
+        self.move_slide_to_second_pivot_position_button.clicked.connect(api_calls_lower.move_slide_to_second_pivot_position)
+        # Move Slide to second final position
+        self.move_slide_to_second_final_position_button.clicked.connect(api_calls_lower.move_slide_to_second_final_position)
+        # Burn Wire     
         self.saveButton4.clicked.connect(self.burn_wire_input)
+        # Discard Pump Actuation
+        self.discard_pump_actuation_button.clicked.connect(api_calls_lower.discard_pump_actuation)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.take_section_button.setText(QCoreApplication.translate("MainWindow", u"Take Section ", None))
-        self.teardown_phase_one_button.setText(QCoreApplication.translate("MainWindow", u"Teardown phase one", None))
-        self.teardown_phase_two_button.setText(QCoreApplication.translate("MainWindow", u"Teardown phase two", None))
-        self.final_process_button.setText(QCoreApplication.translate("MainWindow", u"Final Process ", None))
+        self.first_tissue_pickup_button.setText(QCoreApplication.translate("MainWindow", u"First Tissue Pickup", None))
+        self.second_tissue_pickup_button.setText(QCoreApplication.translate("MainWindow", u"Second Tissue Pickup", None))
         self.discard_tissue_button.setText(QCoreApplication.translate("MainWindow", u"Discard Tissue ", None))
         self.api_calls_higher_label.setText(QCoreApplication.translate("MainWindow", u"API CALLS HIGHER", None))
+        self.go_to_api_calls_lower_button.setText(QCoreApplication.translate("MainWindow", u"Lower API", None))
         self.take_section_label.setText(QCoreApplication.translate("MainWindow", u"TAKE SECTION", None))
         self.thickness_label.setText(QCoreApplication.translate("MainWindow", u"Thickness ", None))
         self.count_label.setText(QCoreApplication.translate("MainWindow", u"Count", None))
@@ -426,63 +509,79 @@ class Ui_MainWindow(object):
         self.api_calls_lower.setText(QCoreApplication.translate("MainWindow", u"API CALLS LOWER", None))
         self.home_slide_gantry_button.setText(QCoreApplication.translate("MainWindow", u"Home Slide Gantry", None))
         self.move_slide_gantry_to_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide Gantry To", None))
-        self.move_slide_to_pickup_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To Pickup Position", None))
-        self.move_slide_to_pivot_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To Pivot Position", None))
-        self.move_slide_to_final_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To Final Position", None))
+        self.move_slide_to_first_pickup_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To First Pickup Position", None))
+        self.move_slide_to_first_pivot_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To First Pivot Position", None))
+        self.move_slide_to_first_final_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide to First Final Position", None))
+        self.move_slide_to_second_pickup_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide to Second Pickup Position", None))
+        self.move_slide_to_second_pivot_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide to Second Pivot Position", None))
+        self.move_slide_to_second_final_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To Second Final Position", None))
         self.home_wire_gantry_button.setText(QCoreApplication.translate("MainWindow", u"Home Wire Gantry", None))
         self.move_wire_gantry_to_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to", None))
         self.move_wire_gantry_to_safe_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Safe Position", None))
         self.move_wire_gantry_to_dip_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Dip Position", None))
         self.move_wire_gantry_to_preteardown_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Pre-teardown position", None))
         self.move_wire_gantry_to_postteardown_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Post-teardown positon", None))
-        self.move_wire_gantry_to_slide_pickup_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Slide Pickup Position", None))
+        self.move_wire_gantry_to_first_pickup_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to First Pickup Position", None))
+        self.move_wire_gantry_to_second_pickup_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Second Pickup Position", None))
         self.hot_pool_gate_open_button.setText(QCoreApplication.translate("MainWindow", u"Hot Pool Gate Open", None))
         self.hot_pool_gate_close_button.setText(QCoreApplication.translate("MainWindow", u"Hot Pool Gate Close", None))
         self.home_flywheel_and_block_button.setText(QCoreApplication.translate("MainWindow", u"Home Flywheel and Block", None))
         self.burn_wire_button.setText(QCoreApplication.translate("MainWindow", u"Burn Wire", None))
         self.discard_pump_actuation_button.setText(QCoreApplication.translate("MainWindow", u"Discard Pump Actuation", None))
         self.home_all_button.setText(QCoreApplication.translate("MainWindow", u"Home All", None))
+        self.backButton5.setText(QCoreApplication.translate("MainWindow", u"Back", None))
         self.move_slide_gantry_to_label.setText(QCoreApplication.translate("MainWindow", u"Move Slide Gantry To", None))
         self.h_value_label.setText(QCoreApplication.translate("MainWindow", u"H Value", None))
         self.i_value_label.setText(QCoreApplication.translate("MainWindow", u"I Value", None))
         self.j_value_label.setText(QCoreApplication.translate("MainWindow", u"J Value", None))
+        self.move_slide_gantry_speed_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
         self.saveButton2.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.backButton2.setText(QCoreApplication.translate("MainWindow", u"Back", None))
         self.move_wire_gantry_to_label.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry To", None))
         self.x_value_label.setText(QCoreApplication.translate("MainWindow", u"X Value", None))
         self.y_value_label.setText(QCoreApplication.translate("MainWindow", u"Y Value:", None))
+        self.move_wire_gantry_speed.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
         self.saveButton3.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.backButton3.setText(QCoreApplication.translate("MainWindow", u"Back", None))
         self.delay_label.setText(QCoreApplication.translate("MainWindow", u"Delay", None))
         self.burn_wire_label.setText(QCoreApplication.translate("MainWindow", u"Burn Wire", None))
         self.saveButton4.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.backButton4.setText(QCoreApplication.translate("MainWindow", u"Back", None))
-    # retranslateUi
+
+    # HIGHEST LEVEL API
 
     # Take thickness and count input from GUI
-    def thickness_and_count_input(self):
+    def take_section_func(self):
+        print('debug test')
         thickness = int(str(self.thickness_input.toPlainText()))
         count = int(str(self.count_input.toPlainText()))
         api_calls_higher.take_sections(thickness, count)
         self.thickness_input.clear()
         self.count_input.clear()
+    
+    # LOWER LEVEL API
 
+    # Move slide gantry to
     def move_slide_gantry_input(self):
         h_input = int(str(self.h_value_input.toPlainText()))
         i_input = int(str(self.i_value_input.toPlainText()))
         j_input = int(str(self.j_value_input.toPlainText()))
-        api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input)
+        speed_input = int(str(self.move_slide_gantry_speed_input.toPlainText()))
+        api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input, speed_input)
         self.h_value_input.clear()
         self.i_value_input.clear()
         self.j_value_input.clear()
 
+    # Move wire gantry to
     def move_wire_gantry_input(self):
         x_input = int(str(self.x_value_input.toPlainText()))
         y_input = int(str(self.y_value_input.toPlainText()))
-        api_calls_lower.move_wire_gantry_to(x_input, y_input)
+        speed_input = int(str(self.move_wire_gantry_speed_input.toPlainText()))
+        api_calls_lower.move_wire_gantry_to(x_input, y_input, speed_input)
         self.x_value_input.clear()
         self.y_value_input.clear()
     
+    # Burn Wire
     def burn_wire_input(self):
         delay_input = int(str(self.delay_input.toPlainText()))
         api_calls_lower.burn_wire(delay_input)
