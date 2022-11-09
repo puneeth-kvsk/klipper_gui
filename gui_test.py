@@ -82,12 +82,18 @@ class Ui_MainWindow(object):
         self.count_label.setGeometry(QRect(220, 110, 67, 17))
         self.backButton1 = QPushButton(self.TakeSection)
         self.backButton1.setObjectName(u"backButton1")
-        self.backButton1.setGeometry(QRect(570, 170, 89, 25))
+        self.backButton1.setGeometry(QRect(570, 260, 89, 25))
         self.saveButton1 = QPushButton(self.TakeSection)
         self.saveButton1.setObjectName(u"saveButton1")
-        self.saveButton1.setGeometry(QRect(470, 170, 89, 25))
+        self.saveButton1.setGeometry(QRect(430, 260, 89, 25))
         self.saveButton1.setStyleSheet(u"\n"
 "background-color: rgb(143, 240, 164);")
+        self.take_section_speed_label = QLabel(self.TakeSection)
+        self.take_section_speed_label.setObjectName(u"take_section_speed_label")
+        self.take_section_speed_label.setGeometry(QRect(220, 180, 67, 17))
+        self.take_section_speed_input = QTextEdit(self.TakeSection)
+        self.take_section_speed_input.setObjectName(u"take_section_speed_input")
+        self.take_section_speed_input.setGeometry(QRect(460, 160, 201, 41))
         self.stackedWidget.addWidget(self.TakeSection)
         self.page_4 = QWidget()
         self.page_4.setObjectName(u"page_4")
@@ -505,6 +511,7 @@ class Ui_MainWindow(object):
         self.count_label.setText(QCoreApplication.translate("MainWindow", u"Count", None))
         self.backButton1.setText(QCoreApplication.translate("MainWindow", u"Back ", None))
         self.saveButton1.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+        self.take_section_speed_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
         self.label_4.setText("")
         self.api_calls_lower.setText(QCoreApplication.translate("MainWindow", u"API CALLS LOWER", None))
         self.home_slide_gantry_button.setText(QCoreApplication.translate("MainWindow", u"Home Slide Gantry", None))
@@ -555,10 +562,12 @@ class Ui_MainWindow(object):
         print('debug test')
         thickness = int(str(self.thickness_input.toPlainText()))
         count = int(str(self.count_input.toPlainText()))
+        #speed = int(str(self.take_section_speed_input.toPlainText()))
         api_calls_higher.take_sections(thickness, count)
         self.thickness_input.clear()
         self.count_input.clear()
-    
+        self.take_section_speed_input.clear()
+
     # LOWER LEVEL API
 
     # Move slide gantry to
@@ -567,7 +576,7 @@ class Ui_MainWindow(object):
         i_input = int(str(self.i_value_input.toPlainText()))
         j_input = int(str(self.j_value_input.toPlainText()))
         speed_input = int(str(self.move_slide_gantry_speed_input.toPlainText()))
-        api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input, speed_input)
+        api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input)
         self.h_value_input.clear()
         self.i_value_input.clear()
         self.j_value_input.clear()
@@ -577,7 +586,7 @@ class Ui_MainWindow(object):
         x_input = int(str(self.x_value_input.toPlainText()))
         y_input = int(str(self.y_value_input.toPlainText()))
         speed_input = int(str(self.move_wire_gantry_speed_input.toPlainText()))
-        api_calls_lower.move_wire_gantry_to(x_input, y_input, speed_input)
+        api_calls_lower.move_wire_gantry_to(x_input, y_input)
         self.x_value_input.clear()
         self.y_value_input.clear()
     
