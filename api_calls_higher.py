@@ -12,34 +12,45 @@ def take_sections(thickness, counts):
     return command_pool
 
 
-# Tissue Teardown phase 1
-def teardown_phase_one():
+# First Tissue Pickup
+def first_tissue_pickup():
     command_pool = []
-    command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())          # Move wire gantry to safe position
-    command_pool.extend(api_calls_lower.move_wire_gantry_to_dip_pos())           # Move wire gantry to dip position
-    command_pool.extend(api_calls_lower.move_wire_gantry_to_preteardown_pos())   # Move wire gantry to preteardown position
-    command_pool.extend(api_calls_lower.move_wire_gantry_to_postteardown_pos())  # Move wire gantry to postteardown position
+    command_pool.extend(api_calls_lower.move_slide_to_first_pickup_position())      # Move slide to first pickup position    
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_dip_pos())              # Move wire gantry to dip position
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_preteardown_pos())      # Move wire gantry to preteardown position
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_postteardown_pos())     # Move wire gantry to postteardown position
+    command_pool.extend(basic_helper.delay_func(1000))                              # Delay  of 1 second
+    command_pool.extend(api_calls_lower.hot_pool_gate_open())                       # Open hot pool gate
+    command_pool.extend(basic_helper.delay_func(1000))                              # Delay  of 1 second
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_first_pickup_pos())
+    command_pool.extend(api_calls_lower.hot_pool_gate_close())
+    command_pool.extend(api_calls_lower.move_slide_to_first_pivot_position())
+    command_pool.extend(api_calls_lower.burn_wire())
+    command_pool.extend(api_calls_lower.move_slide_to_first_final_position())
+    command_pool.extend(basic_helper.delay_func(1000))
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())
+    command_pool.extend(basic_helper.delay_func(1000))
     return command_pool
 
 
-# Tissue Teardown phase 2
-def teardown_phase_two():
+# Second Tissue Pickup
+def second_tissue_pickup():
     command_pool = []
-    delay = input("Enter wire burn time:")
-    command_pool.extend(api_calls_lower.hot_pool_gate_open())                    # Open pool gate
-    command_pool.extend(api_calls_lower.move_wire_gantry_to_slide_pickup_pos())  # Move wire gantry to slide pickup position
-    command_pool.extend(api_calls_lower.move_slide_to_pivot_position())          # Pivot slide
-    command_pool.extend(api_calls_lower.burn_wire(delay))                        # Burn wire
-    command_pool.extend(api_calls_lower.move_slide_to_final_position())          # Pickup slide
-    return command_pool
-
-
-# Final process
-def final_process():
-    command_pool = []
-    command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())  # Move wire gantry to safe position
-    command_pool.extend(api_calls_lower.hot_pool_gate_close())           # Close pool gate
-    command_pool.extend(api_calls_lower.move_slide_to_final_position())  # Move slide to final position
+    command_pool.extend(api_calls_lower.move_slide_to_second_pickup_position())      # Move slide to first pickup position    
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_dip_pos())              # Move wire gantry to dip position
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_preteardown_pos())      # Move wire gantry to preteardown position
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_postteardown_pos())     # Move wire gantry to postteardown position
+    command_pool.extend(basic_helper.delay_func(1000))                              # Delay  of 1 second
+    command_pool.extend(api_calls_lower.hot_pool_gate_open())                       # Open hot pool gate
+    command_pool.extend(basic_helper.delay_func(1000))                              # Delay  of 1 second
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_second_pickup_pos())
+    command_pool.extend(api_calls_lower.hot_pool_gate_close())
+    command_pool.extend(api_calls_lower.move_slide_to_second_pivot_position())
+    command_pool.extend(api_calls_lower.burn_wire())
+    command_pool.extend(api_calls_lower.move_slide_to_second_final_position())
+    command_pool.extend(basic_helper.delay_func(1000))
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())
+    command_pool.extend(basic_helper.delay_func(1000))
     return command_pool
 
 

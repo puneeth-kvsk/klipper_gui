@@ -23,6 +23,7 @@ def execute_urls(commands, delay):
 
 # Home all
 def home_all():
+    print('debug test')
     command_pool = []
     command_pool.extend(basic_helper.home_axis('I'))
     command_pool.extend(basic_helper.home_axis('H'))
@@ -53,31 +54,52 @@ def home_slide_gantry():
 
 
 # Move slide gantry
-def move_slide_gantry_to(h_value, i_value, j_value):
+def move_slide_gantry_to(h_value, i_value, j_value, speed):
     params = {'H': h_value, 'I': i_value, 'J': j_value}
-    command_pool = basic_helper.move_multiple_axes_to(params)
+    command_pool = basic_helper.move_multiple_axes_to(params, speed)
     return command_pool
 
 
-# Move slide to pickup position
-def move_slide_to_pickup_position():
+# Move slide to first pickup position
+def move_slide_to_first_pickup_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(190, 110, 30))
+    command_pool.extend(move_slide_gantry_to(203, 105, 55, 6000))
     return command_pool
 
 
-# Move slide to pivot position
-def move_slide_to_pivot_position():
+# Move slide to first pivot position
+def move_slide_to_first_pivot_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(200.498, 95.007, 40))
+    command_pool.extend(move_slide_gantry_to(209.14652795130417, 101.0083, 59, 3000))
     return command_pool
 
 
-# Move slide to final position
-def move_slide_to_final_position():
+# Move slide to first final position
+def move_slide_to_first_final_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(185.177, 82.1515, 40))
+    command_pool.extend(move_slide_gantry_to(178.2442, 49.578, 59, 6000))
     return command_pool
+
+# Move slide to second pickup position
+def move_slide_to_second_pickup_position():
+    command_pool = []
+    command_pool.extend(move_slide_gantry_to(203, 81, 55, 3000))
+    return command_pool
+
+
+# Move slide to second pivot position
+def move_slide_to_second_pivot_position():
+    command_pool = []
+    command_pool.extend(move_slide_gantry_to(209.14652795130417, 77.0083, 59, 2000))
+    return command_pool
+
+
+# Move slide to second final position
+def move_slide_to_second_final_position():
+    command_pool = []
+    command_pool.extend(move_slide_gantry_to(178.2442, 25.578, 59, 6000))
+    return command_pool
+
 # SLIDE GANTRY ROUTINES END
 
 
@@ -101,9 +123,9 @@ def home_wire_gantry():
 
 
 # Move Wire Gantry
-def move_wire_gantry_to(x_value, y_value):
+def move_wire_gantry_to(x_value, y_value, speed):
     params = {'Y': y_value, 'X': x_value}
-    command_pool = basic_helper.move_multiple_axes_to(params)
+    command_pool = basic_helper.move_multiple_axes_to(params, speed)
     return command_pool
 
 
@@ -135,10 +157,17 @@ def move_wire_gantry_to_postteardown_pos():
     return command_pool
 
 
-# Move wire gantry to slide pickup position
-def move_wire_gantry_to_slide_pickup_pos():
+# Move wire gantry to first pickup position
+def move_wire_gantry_to_first_pickup_pos():
     command_pool = []
-    #command_pool.extend(move_wire_gantry_to(, ))  # To be filled with hardcoded values
+    command_pool.extend(move_wire_gantry_to(0, 12.5, 3000))  # To be filled with hardcoded values
+    return command_pool
+
+
+# Move wire gantry to second pickup position
+def move_wire_gantry_to_second_pickup_pos():
+    command_pool = []
+    command_pool.extend(move_wire_gantry_to(15, 12.5, 3000))  # To be filled with hardcoded values
     return command_pool
 
 # WIRE GANTRY ROUTINES END
