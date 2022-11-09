@@ -46,78 +46,38 @@ def home_axis(axis):
 # Move axis to
 def move_axis_to(axis, value, speed):
     command_pool = []
-
-    if speed == 2000:
-        speed == speed_2000
-    elif speed == 3000:
-        speed == speed_3000
-    elif speed == 6000:
-        speed == speed_6000
-    else:
-        speed == speed_12000
-
     command_pool.extend(low_level_functions.set_max_vel_accel_auto(str(axis)))
     if axis == 'J':
-        command_pool.extend([low_level_functions.gcodeUrl + absolute_position_command, low_level_functions.gcodeUrl + move_axis_command + speed + axis + str(value + 30)])
+        command_pool.extend([low_level_functions.gcodeUrl + absolute_position_command, low_level_functions.gcodeUrl + move_axis_command + speed_12000 + axis + str(value + 30)])
     else:
-        command_pool.extend([low_level_functions.gcodeUrl + absolute_position_command, low_level_functions.gcodeUrl + move_axis_command + speed + axis + str(value)])
+        command_pool.extend([low_level_functions.gcodeUrl + absolute_position_command, low_level_functions.gcodeUrl + move_axis_command + speed_12000 + axis + str(value)])
     return command_pool
 
 
 # Move axis forward by
-def move_axis_forward_by(axis, value, speed):
+def move_axis_forward_by(axis, value):
     command_pool = []
-
-    if speed == 2000:
-        speed == speed_2000
-    elif speed == 3000:
-        speed == speed_3000
-    elif speed == 6000:
-        speed == speed_6000
-    else:
-        speed == speed_12000
-        
     command_pool.extend(low_level_functions.set_max_vel_accel_auto(str(axis)))
-    command_pool.extend([low_level_functions.gcodeUrl + relative_position_command, low_level_functions.gcodeUrl + move_axis_command + speed + axis + str(value)])
+    command_pool.extend([low_level_functions.gcodeUrl + relative_position_command, low_level_functions.gcodeUrl + move_axis_command + speed_12000 + axis + str(value)])
     return command_pool
 
 
 # Move axis backward by
-def move_axis_backward_by(axis, value, speed):
+def move_axis_backward_by(axis, value):
     command_pool = []
-
-    if speed == 2000:
-        speed == speed_2000
-    elif speed == 3000:
-        speed == speed_3000
-    elif speed == 6000:
-        speed == speed_6000
-    else:
-        speed == speed_12000
-
     command_pool.extend(low_level_functions.set_max_vel_accel_auto(str(axis)))
-    command_pool.extend([low_level_functions.gcodeUrl + relative_position_command, low_level_functions.gcodeUrl + move_axis_command + speed + axis + str(value)])
+    command_pool.extend([low_level_functions.gcodeUrl + relative_position_command, low_level_functions.gcodeUrl + move_axis_command + speed_12000 + axis + str(value)])
     return command_pool
 
 
 # Move multiple axes to
-def move_multiple_axes_to(params, speed):
+def move_multiple_axes_to(params):
     command_pool = []
-
-    if speed == 2000:
-        speed == speed_2000
-    elif speed == 3000:
-        speed == speed_3000
-    elif speed == 6000:
-        speed == speed_6000
-    else:
-        speed == speed_12000
-
     for key in params:
         command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
         break
 
-    command_pool.append(low_level_functions.gcodeUrl + move_axis_command + speed)
+    command_pool.append(low_level_functions.gcodeUrl + move_axis_command + speed_12000)
     for key, value in params.items():
         if key == 'J':
             command_pool[2] += key + str(int(value) + 30)

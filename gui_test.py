@@ -575,7 +575,7 @@ class Ui_MainWindow(object):
         h_input = int(str(self.h_value_input.toPlainText()))
         i_input = int(str(self.i_value_input.toPlainText()))
         j_input = int(str(self.j_value_input.toPlainText()))
-        speed_input = int(str(self.move_slide_gantry_speed_input.toPlainText()))
+        #speed_input = int(str(self.move_slide_gantry_speed_input.toPlainText()))
         api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input)
         self.h_value_input.clear()
         self.i_value_input.clear()
@@ -585,7 +585,7 @@ class Ui_MainWindow(object):
     def move_wire_gantry_input(self):
         x_input = int(str(self.x_value_input.toPlainText()))
         y_input = int(str(self.y_value_input.toPlainText()))
-        speed_input = int(str(self.move_wire_gantry_speed_input.toPlainText()))
+        #speed_input = int(str(self.move_wire_gantry_speed_input.toPlainText()))
         api_calls_lower.move_wire_gantry_to(x_input, y_input)
         self.x_value_input.clear()
         self.y_value_input.clear()

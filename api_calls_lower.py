@@ -23,7 +23,7 @@ def execute_urls(commands, delay):
 
 # Home all
 def home_all():
-    print('debug test')
+    #print('debug test')
     command_pool = []
     command_pool.extend(basic_helper.home_axis('I'))
     command_pool.extend(basic_helper.home_axis('H'))
@@ -54,50 +54,117 @@ def home_slide_gantry():
 
 
 # Move slide gantry
-def move_slide_gantry_to(h_value, i_value, j_value, speed):
+def move_slide_gantry_to(h_value, i_value, j_value):
     params = {'H': h_value, 'I': i_value, 'J': j_value}
-    command_pool = basic_helper.move_multiple_axes_to(params, speed)
+    command_pool = basic_helper.move_multiple_axes_to(params)
     return command_pool
 
 
 # Move slide to first pickup position
 def move_slide_to_first_pickup_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(203, 105, 55, 6000))
+    #command_pool.extend(move_slide_gantry_to(203, 105, 55, 6000))
+    params = {'H': 203, 'I': 105, 'J': 55}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_6000)
+    for key, value in params.items():
+        if key == 'J':
+            command_pool[2] += key + str(int(value) + 30)
+        else:
+            command_pool[2] += key + str(value)
     return command_pool
 
 
 # Move slide to first pivot position
 def move_slide_to_first_pivot_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(209.14652795130417, 101.0083, 59, 3000))
+    #command_pool.extend(move_slide_gantry_to(209.14652795130417, 101.0083, 59, 3000))
+    params = {'H': 209.14652795130417, 'I': 101.0083, 'J': 59}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_3000)
+    for key, value in params.items():
+        if key == 'J':
+            command_pool[2] += key + str(int(value) + 30)
+        else:
+            command_pool[2] += key + str(value)
     return command_pool
 
 
 # Move slide to first final position
 def move_slide_to_first_final_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(178.2442, 49.578, 59, 6000))
+    #command_pool.extend(move_slide_gantry_to(178.2442, 49.578, 59, 6000))
+    params = {'H': 178.2442, 'I': 49.578, 'J': 59}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_6000)
+    for key, value in params.items():
+        if key == 'J':
+            command_pool[2] += key + str(int(value) + 30)
+        else:
+            command_pool[2] += key + str(value)
     return command_pool
+
 
 # Move slide to second pickup position
 def move_slide_to_second_pickup_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(203, 81, 55, 3000))
+    #command_pool.extend(move_slide_gantry_to(203, 81, 55, 3000))
+    params = {'H': 203, 'I': 81, 'J': 55}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_3000)
+    for key, value in params.items():
+        if key == 'J':
+            command_pool[2] += key + str(int(value) + 30)
+        else:
+            command_pool[2] += key + str(value)
     return command_pool
 
 
 # Move slide to second pivot position
 def move_slide_to_second_pivot_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(209.14652795130417, 77.0083, 59, 2000))
+    #command_pool.extend(move_slide_gantry_to(209.14652795130417, 77.0083, 59, 2000))
+    params = {'H': 209.14652795130417, 'I': 77.0083, 'J': 59}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_2000)
+    for key, value in params.items():
+        if key == 'J':
+            command_pool[2] += key + str(int(value) + 30)
+        else:
+            command_pool[2] += key + str(value)
     return command_pool
 
 
 # Move slide to second final position
 def move_slide_to_second_final_position():
     command_pool = []
-    command_pool.extend(move_slide_gantry_to(178.2442, 25.578, 59, 6000))
+    #command_pool.extend(move_slide_gantry_to(178.2442, 25.578, 59, 6000))
+    params = {'H': 178.2442, 'I': 25.578, 'J': 59}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_6000)
+    for key, value in params.items():
+        if key == 'J':
+            command_pool[2] += key + str(int(value) + 30)
+        else:
+            command_pool[2] += key + str(value)
     return command_pool
 
 # SLIDE GANTRY ROUTINES END
@@ -123,9 +190,10 @@ def home_wire_gantry():
 
 
 # Move Wire Gantry
-def move_wire_gantry_to(x_value, y_value, speed):
+def move_wire_gantry_to(x_value, y_value):
+    #print('debug message')
     params = {'Y': y_value, 'X': x_value}
-    command_pool = basic_helper.move_multiple_axes_to(params, speed)
+    command_pool = basic_helper.move_multiple_axes_to(params)
     return command_pool
 
 
