@@ -3,6 +3,11 @@ import individual_commands
 import api_calls_lower
 
 
+# Execute Commands
+def execute_commands(my_list):
+    api_calls_lower.execute_urls(my_list, 0.05)
+
+
 # Take section process
 def take_sections(thickness, counts):
     command_pool = []
@@ -25,7 +30,7 @@ def first_tissue_pickup():
     command_pool.extend(api_calls_lower.move_wire_gantry_to_first_pickup_pos())
     command_pool.extend(api_calls_lower.hot_pool_gate_close())
     command_pool.extend(api_calls_lower.move_slide_to_first_pivot_position())
-    command_pool.extend(api_calls_lower.burn_wire())
+    command_pool.extend(api_calls_lower.burn_wire(1000))
     command_pool.extend(api_calls_lower.move_slide_to_first_final_position())
     command_pool.extend(basic_helper.delay_func(1000))
     command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())
@@ -46,7 +51,7 @@ def second_tissue_pickup():
     command_pool.extend(api_calls_lower.move_wire_gantry_to_second_pickup_pos())
     command_pool.extend(api_calls_lower.hot_pool_gate_close())
     command_pool.extend(api_calls_lower.move_slide_to_second_pivot_position())
-    command_pool.extend(api_calls_lower.burn_wire())
+    command_pool.extend(api_calls_lower.burn_wire(1000))
     command_pool.extend(api_calls_lower.move_slide_to_second_final_position())
     command_pool.extend(basic_helper.delay_func(1000))
     command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())

@@ -7,7 +7,7 @@ import api_calls_lower
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
-            MainWindow.setObjectName(u"MainWindow")
+            MainWindow.setObjectName(u"Microtome")
         MainWindow.resize(868, 589)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
@@ -86,8 +86,7 @@ class Ui_MainWindow(object):
         self.saveButton1 = QPushButton(self.TakeSection)
         self.saveButton1.setObjectName(u"saveButton1")
         self.saveButton1.setGeometry(QRect(430, 260, 89, 25))
-        self.saveButton1.setStyleSheet(u"\n"
-"background-color: rgb(143, 240, 164);")
+        self.saveButton1.setStyleSheet(u"\n""background-color: rgb(143, 240, 164);")
         self.take_section_speed_label = QLabel(self.TakeSection)
         self.take_section_speed_label.setObjectName(u"take_section_speed_label")
         self.take_section_speed_label.setGeometry(QRect(220, 180, 67, 17))
@@ -417,11 +416,15 @@ class Ui_MainWindow(object):
 
         self.stackedWidget.setCurrentIndex(2)
 
-
         QMetaObject.connectSlotsByName(MainWindow)
-        
-        # Linking Pages
 
+
+        ##################################################
+        # GUI Manipulation
+        ##################################################
+
+
+        # Linking Pages
         self.stackedWidget.setCurrentIndex(0)
 
         # Go to API Lower calls page
@@ -433,168 +436,321 @@ class Ui_MainWindow(object):
         # Take Section Page
         self.take_section_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
         self.backButton1.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
-        
 
         # Move slide gantry page
         self.move_slide_gantry_to_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(3))
         self.backButton2.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-        
 
         # Move wire gantry page
         self.move_wire_gantry_to_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(4))
         self.backButton3.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-        
 
         # Burn Wire Page
         self.burn_wire_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(5))
         self.backButton4.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
-        
 
         # Highest Level API calls
         self.saveButton1.clicked.connect(self.take_section_func)
-        self.first_tissue_pickup_button.clicked.connect(api_calls_higher.first_tissue_pickup)
-        self.second_tissue_pickup_button.clicked.connect(api_calls_higher.second_tissue_pickup)
-        self.discard_tissue_button.clicked.connect(api_calls_higher.discard_tissue)
+        self.first_tissue_pickup_button.clicked.connect(self.first_tissue_pickup_func)
+        self.second_tissue_pickup_button.clicked.connect(self.second_tissue_pickup_func)
+        self.discard_tissue_button.clicked.connect(self.discard_tissue_func)
 
         # Lower Level API Calls
+
+        # Homing functions
         # Home all
-        self.home_all_button.clicked.connect(api_calls_lower.home_all)
+        self.home_all_button.clicked.connect(self.home_all_func)
         # Home Flywheel and Block
-        self.home_flywheel_and_block_button.clicked.connect(api_calls_lower.home_flywheel_and_block)
+        self.home_flywheel_and_block_button.clicked.connect(self.home_flywheel_and_block_func)
         # Home Wire Gantry
-        self.home_wire_gantry_button.clicked.connect(api_calls_lower.home_wire_gantry)
+        self.home_wire_gantry_button.clicked.connect(self.home_wire_gantry_func)
+        # Home slide Gantry
+        self.home_slide_gantry_button.clicked.connect(self.home_slide_gantry_func)
+
+        # Moving functions
+
+        # Moving functions for Wire Gantry
         # Move Wire Gantry To - takes inputs
         self.saveButton3.clicked.connect(self.move_wire_gantry_input)
         # Move Wire Gantry to safe position
-        self.move_wire_gantry_to_safe_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_safe_pos)
+        self.move_wire_gantry_to_safe_pos_button.clicked.connect(self.move_wire_gantry_to_safe_pos_func)
         # Move Wire Gantry to dip position
-        self.move_wire_gantry_to_dip_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_dip_pos)
+        self.move_wire_gantry_to_dip_pos_button.clicked.connect(self.move_wire_gantry_to_dip_position_func)
         # Move Wire Gantry to pre-teardown position
-        self.move_wire_gantry_to_preteardown_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_preteardown_pos)
-        # Move Wire Gantry to post-teardown positon
-        self.move_wire_gantry_to_postteardown_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_postteardown_pos)
+        self.move_wire_gantry_to_preteardown_pos_button.clicked.connect(self.move_wire_gantry_to_preteardown_pos_func)
+        # Move Wire Gantry to post-teardown position
+        self.move_wire_gantry_to_postteardown_pos_button.clicked.connect(self.move_wire_gantry_to_postteardown_pos_func)
         # Move Wire Gantry to First Pickup position
-        self.move_wire_gantry_to_first_pickup_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_first_pickup_pos)
+        self.move_wire_gantry_to_first_pickup_pos_button.clicked.connect(self.move_wire_gantry_top_first_pickup_pos_func)
         # Move Wire Gantry to Second Pickup position
-        self.move_wire_gantry_to_second_pickup_pos_button.clicked.connect(api_calls_lower.move_wire_gantry_to_second_pickup_pos)
-        # Home Slide Gantry
-        self.home_slide_gantry_button.clicked.connect(api_calls_lower.home_slide_gantry)
+        self.move_wire_gantry_to_second_pickup_pos_button.clicked.connect(self.move_wire_gantry_to_second_pickup_pos_func)
+
+        # Moving functions for slide gantry
         # Move Slide Gantry To - takes inputs
         self.saveButton2.clicked.connect(self.move_slide_gantry_input)
         # Move Slide to first pickup position
-        self.move_slide_to_first_pickup_position_button.clicked.connect(api_calls_lower.move_slide_to_first_pickup_position)
+        self.move_slide_to_first_pickup_position_button.clicked.connect(self.move_slide_to_first_pickup_pos_func)
         # Move Slide to first pivot position
-        self.move_slide_to_first_pivot_position_button.clicked.connect(api_calls_lower.move_slide_to_first_pivot_position)
+        self.move_slide_to_first_pivot_position_button.clicked.connect(self.move_slide_to_first_pivot_pos_func)
         # Move Slide to first final position
-        self.move_slide_to_first_final_position_button.clicked.connect(api_calls_lower.move_slide_to_first_final_position)
+        self.move_slide_to_first_final_position_button.clicked.connect(self.move_slide_to_first_final_pos_func)
         # Move Slide to second pickup postion
-        self.move_slide_to_second_pickup_position_button.clicked.connect(api_calls_lower.move_slide_to_second_pickup_position)
+        self.move_slide_to_second_pickup_position_button.clicked.connect(self.move_slide_to_second_pickup_pos_func)
         # Move Slide to second pivot position
-        self.move_slide_to_second_pivot_position_button.clicked.connect(api_calls_lower.move_slide_to_second_pivot_position)
+        self.move_slide_to_second_pivot_position_button.clicked.connect(self.move_slide_to_second_pivot_pos_func)
         # Move Slide to second final position
-        self.move_slide_to_second_final_position_button.clicked.connect(api_calls_lower.move_slide_to_second_final_position)
+        self.move_slide_to_second_final_position_button.clicked.connect(self.move_slide_to_second_final_pos_func)
+
         # Burn Wire     
         self.saveButton4.clicked.connect(self.burn_wire_input)
+
         # Discard Pump Actuation
-        self.discard_pump_actuation_button.clicked.connect(api_calls_lower.discard_pump_actuation)
+        self.discard_pump_actuation_button.clicked.connect(self.discard_pump_actuation_func)
 
-    def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
-        self.take_section_button.setText(QCoreApplication.translate("MainWindow", u"Take Section ", None))
-        self.first_tissue_pickup_button.setText(QCoreApplication.translate("MainWindow", u"First Tissue Pickup", None))
-        self.second_tissue_pickup_button.setText(QCoreApplication.translate("MainWindow", u"Second Tissue Pickup", None))
-        self.discard_tissue_button.setText(QCoreApplication.translate("MainWindow", u"Discard Tissue ", None))
-        self.api_calls_higher_label.setText(QCoreApplication.translate("MainWindow", u"API CALLS HIGHER", None))
-        self.go_to_api_calls_lower_button.setText(QCoreApplication.translate("MainWindow", u"Lower API", None))
-        self.take_section_label.setText(QCoreApplication.translate("MainWindow", u"TAKE SECTION", None))
-        self.thickness_label.setText(QCoreApplication.translate("MainWindow", u"Thickness ", None))
-        self.count_label.setText(QCoreApplication.translate("MainWindow", u"Count", None))
-        self.backButton1.setText(QCoreApplication.translate("MainWindow", u"Back ", None))
-        self.saveButton1.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-        self.take_section_speed_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
-        self.label_4.setText("")
-        self.api_calls_lower.setText(QCoreApplication.translate("MainWindow", u"API CALLS LOWER", None))
-        self.home_slide_gantry_button.setText(QCoreApplication.translate("MainWindow", u"Home Slide Gantry", None))
-        self.move_slide_gantry_to_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide Gantry To", None))
-        self.move_slide_to_first_pickup_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To First Pickup Position", None))
-        self.move_slide_to_first_pivot_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To First Pivot Position", None))
-        self.move_slide_to_first_final_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide to First Final Position", None))
-        self.move_slide_to_second_pickup_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide to Second Pickup Position", None))
-        self.move_slide_to_second_pivot_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide to Second Pivot Position", None))
-        self.move_slide_to_second_final_position_button.setText(QCoreApplication.translate("MainWindow", u"Move Slide To Second Final Position", None))
-        self.home_wire_gantry_button.setText(QCoreApplication.translate("MainWindow", u"Home Wire Gantry", None))
-        self.move_wire_gantry_to_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to", None))
-        self.move_wire_gantry_to_safe_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Safe Position", None))
-        self.move_wire_gantry_to_dip_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Dip Position", None))
-        self.move_wire_gantry_to_preteardown_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Pre-teardown position", None))
-        self.move_wire_gantry_to_postteardown_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Post-teardown positon", None))
-        self.move_wire_gantry_to_first_pickup_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to First Pickup Position", None))
-        self.move_wire_gantry_to_second_pickup_pos_button.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry to Second Pickup Position", None))
-        self.hot_pool_gate_open_button.setText(QCoreApplication.translate("MainWindow", u"Hot Pool Gate Open", None))
-        self.hot_pool_gate_close_button.setText(QCoreApplication.translate("MainWindow", u"Hot Pool Gate Close", None))
-        self.home_flywheel_and_block_button.setText(QCoreApplication.translate("MainWindow", u"Home Flywheel and Block", None))
-        self.burn_wire_button.setText(QCoreApplication.translate("MainWindow", u"Burn Wire", None))
-        self.discard_pump_actuation_button.setText(QCoreApplication.translate("MainWindow", u"Discard Pump Actuation", None))
-        self.home_all_button.setText(QCoreApplication.translate("MainWindow", u"Home All", None))
-        self.backButton5.setText(QCoreApplication.translate("MainWindow", u"Back", None))
-        self.move_slide_gantry_to_label.setText(QCoreApplication.translate("MainWindow", u"Move Slide Gantry To", None))
-        self.h_value_label.setText(QCoreApplication.translate("MainWindow", u"H Value", None))
-        self.i_value_label.setText(QCoreApplication.translate("MainWindow", u"I Value", None))
-        self.j_value_label.setText(QCoreApplication.translate("MainWindow", u"J Value", None))
-        self.move_slide_gantry_speed_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
-        self.saveButton2.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-        self.backButton2.setText(QCoreApplication.translate("MainWindow", u"Back", None))
-        self.move_wire_gantry_to_label.setText(QCoreApplication.translate("MainWindow", u"Move Wire Gantry To", None))
-        self.x_value_label.setText(QCoreApplication.translate("MainWindow", u"X Value", None))
-        self.y_value_label.setText(QCoreApplication.translate("MainWindow", u"Y Value:", None))
-        self.move_wire_gantry_speed.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
-        self.saveButton3.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-        self.backButton3.setText(QCoreApplication.translate("MainWindow", u"Back", None))
-        self.delay_label.setText(QCoreApplication.translate("MainWindow", u"Delay", None))
-        self.burn_wire_label.setText(QCoreApplication.translate("MainWindow", u"Burn Wire", None))
-        self.saveButton4.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-        self.backButton4.setText(QCoreApplication.translate("MainWindow", u"Back", None))
+        # Pool Gate open
+        self.hot_pool_gate_open_button.clicked.connect(self.hot_pool_gate_open_func)
+        # Pool Gate close
+        self.hot_pool_gate_close_button.clicked.connect(self.hot_pool_gate_close_func)
 
-    # HIGHEST LEVEL API
+    ####################################
+    # HIGHER LEVEL API
+    ####################################
 
-    # Take thickness and count input from GUI
+    # Take Sections function
     def take_section_func(self):
-        print('debug test')
         thickness = int(str(self.thickness_input.toPlainText()))
         count = int(str(self.count_input.toPlainText()))
-        #speed = int(str(self.take_section_speed_input.toPlainText()))
         api_calls_higher.take_sections(thickness, count)
         self.thickness_input.clear()
         self.count_input.clear()
         self.take_section_speed_input.clear()
 
+    # First Tissue Pickup function
+    def first_tissue_pickup_func(self):
+        commands = api_calls_higher.first_tissue_pickup()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Second Tissue Pickup function
+    def second_tissue_pickup_func(self):
+        commands = api_calls_higher.second_tissue_pickup()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Discard Tissue function
+    def discard_tissue_func(self):
+        commands = api_calls_higher.discard_tissue()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    ######################################
     # LOWER LEVEL API
+    ######################################
+
+    ######################################
+    # Homing functions
+    ######################################
+
+    # Home all func
+    def home_all_func(self):
+        commands = api_calls_lower.home_all()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Home flywheel and block
+    def home_flywheel_and_block_func(self):
+        commands = api_calls_lower.home_flywheel_and_block()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Home Wire Gantry func
+    def home_wire_gantry_func(self):
+        commands = api_calls_lower.home_wire_gantry()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Home slide gantry func
+    def home_slide_gantry_func(self):
+        commands = api_calls_lower.home_slide_gantry()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    ######################################
+    # Moving functions
+    ######################################
+
+    ########
+    # Move Wire Gantry functions
+    ########
+
+    # Move wire gantry to
+    def move_wire_gantry_input(self):
+        x_input = int(str(self.x_value_input.toPlainText()))
+        y_input = int(str(self.y_value_input.toPlainText()))
+        # speed_input = int(str(self.move_wire_gantry_speed_input.toPlainText()))
+        self.x_value_input.clear()
+        self.y_value_input.clear()
+        commands = api_calls_lower.move_wire_gantry_to(x_input, y_input)
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move wire gantry to safe position function
+    def move_wire_gantry_to_safe_pos_func(self):
+        commands = api_calls_lower.move_wire_gantry_to_safe_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Wire Gantry to dip position function
+    def move_wire_gantry_to_dip_position_func(self):
+        commands = api_calls_lower.move_wire_gantry_to_dip_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Wire Gantry to pre-teardown position function
+    def move_wire_gantry_to_preteardown_pos_func(self):
+        commands = api_calls_lower.move_wire_gantry_to_preteardown_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Wire Gantry to post-teardown position func
+    def move_wire_gantry_to_postteardown_pos_func(self):
+        commands = api_calls_lower.move_wire_gantry_to_postteardown_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Wire Gantry to First Pickup position func
+    def move_wire_gantry_top_first_pickup_pos_func(self):
+        commands = api_calls_lower.move_wire_gantry_to_first_pickup_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Wire Gantry to Second Pickup position func
+    def move_wire_gantry_to_second_pickup_pos_func(self):
+        commands = api_calls_lower.move_wire_gantry_to_second_pickup_pos()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    ########
+    # Move Slide Gantry functions
+    ########
 
     # Move slide gantry to
     def move_slide_gantry_input(self):
         h_input = int(str(self.h_value_input.toPlainText()))
         i_input = int(str(self.i_value_input.toPlainText()))
         j_input = int(str(self.j_value_input.toPlainText()))
-        #speed_input = int(str(self.move_slide_gantry_speed_input.toPlainText()))
-        api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input)
+        # speed_input = int(str(self.move_slide_gantry_speed_input.toPlainText()))
         self.h_value_input.clear()
         self.i_value_input.clear()
         self.j_value_input.clear()
+        commands = api_calls_lower.move_slide_gantry_to(h_input, i_input, j_input)
+        api_calls_lower.execute_urls(commands, 0.05)
 
-    # Move wire gantry to
-    def move_wire_gantry_input(self):
-        x_input = int(str(self.x_value_input.toPlainText()))
-        y_input = int(str(self.y_value_input.toPlainText()))
-        #speed_input = int(str(self.move_wire_gantry_speed_input.toPlainText()))
-        api_calls_lower.move_wire_gantry_to(x_input, y_input)
-        self.x_value_input.clear()
-        self.y_value_input.clear()
-    
+    # Move Slide to first pickup position func
+    def move_slide_to_first_pickup_pos_func(self):
+        commands = api_calls_lower.move_slide_to_first_pickup_position()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Slide to first pivot position func
+    def move_slide_to_first_pivot_pos_func(self):
+        commands = api_calls_lower.move_slide_to_first_pivot_position()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Slide to first final position func
+    def move_slide_to_first_final_pos_func(self):
+        commands = api_calls_lower.move_slide_to_first_final_position()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Slide to second pickup postion func
+    def move_slide_to_second_pickup_pos_func(self):
+        commands = api_calls_lower.move_slide_to_second_pickup_position()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Slide to second pivot position func
+    def move_slide_to_second_pivot_pos_func(self):
+        commands = api_calls_lower.move_slide_to_second_pivot_position()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    # Move Slide to second final position func
+    def move_slide_to_second_final_pos_func(self):
+        commands = api_calls_lower.move_slide_to_second_final_position()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    ########
     # Burn Wire
+    ########
     def burn_wire_input(self):
         delay_input = int(str(self.delay_input.toPlainText()))
-        api_calls_lower.burn_wire(delay_input)
         self.delay_input.clear()
+        commands = api_calls_lower.burn_wire(delay_input)
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    ########
+    # Discard Pump Actuation
+    ########
+    def discard_pump_actuation_func(self):
+        commands = api_calls_lower.discard_pump_actuation()
+        api_calls_lower.execute_urls(commands, 0.05)
+
+    ########
+    # Hot Pool Gate functions
+    ########
+    # Open Hot pool gate func
+    def hot_pool_gate_open_func(self):
+        commands = api_calls_lower.hot_pool_gate_open()
+        api_calls_lower.execute_urls(commands, 0)
+
+    # Close Hot pool gate func
+    def hot_pool_gate_close_func(self):
+        commands = api_calls_lower.hot_pool_gate_close()
+        api_calls_lower.execute_urls(commands, 0)
+
+    ######################################
+    # GUI Helper
+    ######################################
+
+    def retranslateUi(self, MainWindow):
+        MainWindow.setWindowTitle(QCoreApplication.translate("Microtome", u"Microtome", None))
+        self.take_section_button.setText(QCoreApplication.translate("Microtome", u"Take Section ", None))
+        self.first_tissue_pickup_button.setText(QCoreApplication.translate("Microtome", u"First Tissue Pickup", None))
+        self.second_tissue_pickup_button.setText(QCoreApplication.translate("Microtome", u"Second Tissue Pickup", None))
+        self.discard_tissue_button.setText(QCoreApplication.translate("Microtome", u"Discard Tissue ", None))
+        self.api_calls_higher_label.setText(QCoreApplication.translate("Microtome", u"API CALLS HIGHER", None))
+        self.go_to_api_calls_lower_button.setText(QCoreApplication.translate("Microtome", u"Lower API", None))
+        self.take_section_label.setText(QCoreApplication.translate("Microtome", u"TAKE SECTION", None))
+        self.thickness_label.setText(QCoreApplication.translate("Microtome", u"Thickness ", None))
+        self.count_label.setText(QCoreApplication.translate("Microtome", u"Count", None))
+        self.backButton1.setText(QCoreApplication.translate("Microtome", u"Back ", None))
+        self.saveButton1.setText(QCoreApplication.translate("Microtome", u"Save", None))
+        self.take_section_speed_label.setText(QCoreApplication.translate("Microtome", u"Speed", None))
+        self.label_4.setText("")
+        self.api_calls_lower.setText(QCoreApplication.translate("Microtome", u"API CALLS LOWER", None))
+        self.home_slide_gantry_button.setText(QCoreApplication.translate("Microtome", u"Home Slide Gantry", None))
+        self.move_slide_gantry_to_button.setText(QCoreApplication.translate("Microtome", u"Move Slide Gantry To", None))
+        self.move_slide_to_first_pickup_position_button.setText(QCoreApplication.translate("Microtome", u"Move Slide To First Pickup Position", None))
+        self.move_slide_to_first_pivot_position_button.setText(QCoreApplication.translate("Microtome", u"Move Slide To First Pivot Position", None))
+        self.move_slide_to_first_final_position_button.setText(QCoreApplication.translate("Microtome", u"Move Slide to First Final Position", None))
+        self.move_slide_to_second_pickup_position_button.setText(QCoreApplication.translate("Microtome", u"Move Slide to Second Pickup Position", None))
+        self.move_slide_to_second_pivot_position_button.setText(QCoreApplication.translate("Microtome", u"Move Slide to Second Pivot Position", None))
+        self.move_slide_to_second_final_position_button.setText(QCoreApplication.translate("Microtome", u"Move Slide To Second Final Position", None))
+        self.home_wire_gantry_button.setText(QCoreApplication.translate("Microtome", u"Home Wire Gantry", None))
+        self.move_wire_gantry_to_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to", None))
+        self.move_wire_gantry_to_safe_pos_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to Safe Position", None))
+        self.move_wire_gantry_to_dip_pos_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to Dip Position", None))
+        self.move_wire_gantry_to_preteardown_pos_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to Pre-teardown position", None))
+        self.move_wire_gantry_to_postteardown_pos_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to Post-teardown positon", None))
+        self.move_wire_gantry_to_first_pickup_pos_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to First Pickup Position", None))
+        self.move_wire_gantry_to_second_pickup_pos_button.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry to Second Pickup Position", None))
+        self.hot_pool_gate_open_button.setText(QCoreApplication.translate("Microtome", u"Hot Pool Gate Open", None))
+        self.hot_pool_gate_close_button.setText(QCoreApplication.translate("Microtome", u"Hot Pool Gate Close", None))
+        self.home_flywheel_and_block_button.setText(QCoreApplication.translate("Microtome", u"Home Flywheel and Block", None))
+        self.burn_wire_button.setText(QCoreApplication.translate("Microtome", u"Burn Wire", None))
+        self.discard_pump_actuation_button.setText(QCoreApplication.translate("Microtome", u"Discard Pump Actuation", None))
+        self.home_all_button.setText(QCoreApplication.translate("Microtome", u"Home All", None))
+        self.backButton5.setText(QCoreApplication.translate("Microtome", u"Back", None))
+        self.move_slide_gantry_to_label.setText(QCoreApplication.translate("Microtome", u"Move Slide Gantry To", None))
+        self.h_value_label.setText(QCoreApplication.translate("Microtome", u"H Value", None))
+        self.i_value_label.setText(QCoreApplication.translate("Microtome", u"I Value", None))
+        self.j_value_label.setText(QCoreApplication.translate("Microtome", u"J Value", None))
+        self.move_slide_gantry_speed_label.setText(QCoreApplication.translate("MainWindow", u"Speed", None))
+        self.saveButton2.setText(QCoreApplication.translate("Microtome", u"Save", None))
+        self.backButton2.setText(QCoreApplication.translate("Microtome", u"Back", None))
+        self.move_wire_gantry_to_label.setText(QCoreApplication.translate("Microtome", u"Move Wire Gantry To", None))
+        self.x_value_label.setText(QCoreApplication.translate("Microtome", u"X Value", None))
+        self.y_value_label.setText(QCoreApplication.translate("Microtome", u"Y Value:", None))
+        self.move_wire_gantry_speed.setText(QCoreApplication.translate("Microtome", u"Speed", None))
+        self.saveButton3.setText(QCoreApplication.translate("Microtome", u"Save", None))
+        self.backButton3.setText(QCoreApplication.translate("Microtome", u"Back", None))
+        self.delay_label.setText(QCoreApplication.translate("Microtome", u"Delay", None))
+        self.burn_wire_label.setText(QCoreApplication.translate("Microtome", u"Burn Wire", None))
+        self.saveButton4.setText(QCoreApplication.translate("Microtome", u"Save", None))
+        self.backButton4.setText(QCoreApplication.translate("Microtome", u"Back", None))
 
 
 if __name__ == "__main__":

@@ -191,7 +191,6 @@ def home_wire_gantry():
 
 # Move Wire Gantry
 def move_wire_gantry_to(x_value, y_value):
-    #print('debug message')
     params = {'Y': y_value, 'X': x_value}
     command_pool = basic_helper.move_multiple_axes_to(params)
     return command_pool
@@ -228,14 +227,30 @@ def move_wire_gantry_to_postteardown_pos():
 # Move wire gantry to first pickup position
 def move_wire_gantry_to_first_pickup_pos():
     command_pool = []
-    command_pool.extend(move_wire_gantry_to(0, 12.5, 3000))  # To be filled with hardcoded values
+    #command_pool.extend(move_wire_gantry_to(0, 12.5, 3000))  # To be filled with hardcoded values
+    params = {'X': 0, 'Y': 12.5}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_3000)
+    for key, value in params.items():
+        command_pool[2] += key + str(value)
     return command_pool
 
 
 # Move wire gantry to second pickup position
 def move_wire_gantry_to_second_pickup_pos():
     command_pool = []
-    command_pool.extend(move_wire_gantry_to(15, 12.5, 3000))  # To be filled with hardcoded values
+    #command_pool.extend(move_wire_gantry_to(15, 12.5, 3000))  # To be filled with hardcoded values
+    params = {'X': 15, 'Y': 12.5}
+    for key in params:
+        command_pool.extend(low_level_functions.set_max_vel_accel_auto(key))
+        break
+
+    command_pool.append(low_level_functions.gcodeUrl + basic_helper.move_axis_command + basic_helper.speed_3000)
+    for key, value in params.items():
+        command_pool[2] += key + str(value)
     return command_pool
 
 # WIRE GANTRY ROUTINES END
@@ -245,14 +260,16 @@ def move_wire_gantry_to_second_pickup_pos():
 # Pool gate open
 def hot_pool_gate_open():
     command_pool = []
-    command_pool.extend(low_level_functions.gcodeUrl + 'SET_SERVO SERVO=config_name ANGLE=' + str(hot_pool_gate_open_angle))
+    command_pool.append(low_level_functions.gcodeUrl + 'SET_SERVO SERVO=hotpool_gate ANGLE=' + str(hot_pool_gate_open_angle))
+    print(command_pool)
     return command_pool
 
 
 # Pool gate close
 def hot_pool_gate_close():
     command_pool = []
-    command_pool.extend(low_level_functions.gcodeUrl + 'SET_SERVO SERVO=config_name ANGLE=' + str(hot_pool_gate_close_angle))
+    command_pool.append(low_level_functions.gcodeUrl + 'SET_SERVO SERVO=hotpool_gate ANGLE=' + str(hot_pool_gate_close_angle))
+    print(command_pool)
     return command_pool
 
 

@@ -44,7 +44,7 @@ def home_axis(axis):
 
 
 # Move axis to
-def move_axis_to(axis, value, speed):
+def move_axis_to(axis, value):
     command_pool = []
     command_pool.extend(low_level_functions.set_max_vel_accel_auto(str(axis)))
     if axis == 'J':
