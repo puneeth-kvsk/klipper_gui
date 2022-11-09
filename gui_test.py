@@ -56,9 +56,17 @@ class Ui_MainWindow(object):
         self.api_calls_higher_label = QLabel(self.frame)
         self.api_calls_higher_label.setObjectName(u"api_calls_higher_label")
         self.api_calls_higher_label.setGeometry(QRect(330, 10, 131, 61))
-        self.go_to_api_calls_lower_button = QPushButton(self.frame)
+        self.verticalLayoutWidget_9 = QWidget(self.frame)
+        self.verticalLayoutWidget_9.setObjectName(u"verticalLayoutWidget_9")
+        self.verticalLayoutWidget_9.setGeometry(QRect(570, 200, 160, 80))
+        self.verticalLayout_9 = QVBoxLayout(self.verticalLayoutWidget_9)
+        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
+        self.verticalLayout_9.setContentsMargins(0, 0, 0, 0)
+        self.go_to_api_calls_lower_button = QPushButton(self.verticalLayoutWidget_9)
         self.go_to_api_calls_lower_button.setObjectName(u"go_to_api_calls_lower_button")
-        self.go_to_api_calls_lower_button.setGeometry(QRect(500, 80, 181, 25))
+
+        self.verticalLayout_9.addWidget(self.go_to_api_calls_lower_button)
+
         self.stackedWidget.addWidget(self.Main_Page)
         self.TakeSection = QWidget()
         self.TakeSection.setObjectName(u"TakeSection")
@@ -194,6 +202,9 @@ class Ui_MainWindow(object):
         self.home_all_button = QPushButton(self.page_4)
         self.home_all_button.setObjectName(u"home_all_button")
         self.home_all_button.setGeometry(QRect(60, 50, 189, 25))
+        self.backButton5 = QPushButton(self.page_4)
+        self.backButton5.setObjectName(u"backButton5")
+        self.backButton5.setGeometry(QRect(350, 420, 89, 25))
         self.stackedWidget.addWidget(self.page_4)
         self.page = QWidget()
         self.page.setObjectName(u"page")
@@ -374,6 +385,9 @@ class Ui_MainWindow(object):
 
         # Go to API Lower calls page
         self.go_to_api_calls_lower_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(2))
+
+        # Go back to MAIN page
+        self.backButton5.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(0))
 
         # Take Section Page
         self.take_section_button.clicked.connect(lambda: self.stackedWidget.setCurrentIndex(1))
