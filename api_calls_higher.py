@@ -20,6 +20,7 @@ def take_sections(thickness, counts):
 # First Tissue Pickup
 def first_tissue_pickup():
     command_pool = []
+    command_pool.extend(api_calls_lower.move_wire_gantry_to_safe_pos())
     command_pool.extend(api_calls_lower.move_slide_to_first_pickup_position())      # Move slide to first pickup position    
     command_pool.extend(api_calls_lower.move_wire_gantry_to_dip_pos())              # Move wire gantry to dip position
     command_pool.extend(api_calls_lower.move_wire_gantry_to_preteardown_pos())      # Move wire gantry to preteardown position
